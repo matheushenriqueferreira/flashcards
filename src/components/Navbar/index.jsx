@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import './styles.css'
 
-export const Navbar = () => {
+export const Navbar = ({ page, btnText, btnLink }) => {
+  const navigate = useNavigate();
   return(
     <header className="navbarHeader">
       <nav>
@@ -10,8 +12,20 @@ export const Navbar = () => {
           <span>QI Labs</span>
         </div>
         <div className="navbarButtons">
-          <button type="button">Cadastre-se</button>
-          <button type="button">Entrar</button>
+          {
+            page === "Home" ?
+            <>
+              <button onClick={() => navigate('/register')} type="button">Cadastre-se</button>
+              <button type="button">Entrar</button>
+            </>
+            :
+            page === "Register" || page === "Login" ?
+            <>
+              <button onClick={() => navigate(btnLink)} type="button">{btnText}</button>
+            </>
+            :
+            null
+          }
         </div>
       </nav>
     </header>
