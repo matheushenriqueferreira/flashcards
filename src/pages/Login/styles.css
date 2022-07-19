@@ -1,0 +1,55 @@
+.loginMain {
+  display: flex;
+  flex-direction: column;
+  margin: 80px 28% 80px 28%;
+  gap: 5em;
+}
+
+.loginContainer1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.loginContainer1 h1 {
+  color: #746ACE;
+  font-size: 58px;
+}
+
+.loginContainer2 {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8em;
+}
+
+.loginContainer2 div input {
+  height: 30px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  padding-left: 10px;
+}
+
+.loginContainer2 div:nth-child(2) span {
+  color: #e60000;
+  font-size: 12px;
+}
+
+.loginBtn {
+  display: flex;
+  justify-content: center;
+}
+
+.loginBtn button {
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  background: #5E5796;
+  width: 115px;
+  height: 35px;
+  cursor: pointer;
+}
