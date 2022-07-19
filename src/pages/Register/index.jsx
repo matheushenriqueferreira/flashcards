@@ -6,7 +6,7 @@ export const Register = () => {
   const [userName, setUserName] = useState('')
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [userRepeatPassword, setRepeatPassword] = useState('');
+  const [userRepeatPassword, setUserRepeatPassword] = useState('');
   
   return(
     <>
@@ -19,20 +19,20 @@ export const Register = () => {
         <div className="registerContainer2">
           <div>
             <label>Nome</label>
-            <input type={'text'} placeholder='Insira o seu nome completo'/>
+            <input onChange={(e) => setUserName(e.target.value)} value={userName} type={'text'} placeholder='Insira o seu nome completo'/>
           </div>
           <div>
             <label>E-mail</label>
-            <input type={'text'} placeholder='Insira o seu e-mail' />
+            <input onChange={(e) => setUserEmail(e.target.value)} value ={userEmail} type={'text'} placeholder='Insira o seu e-mail' />
           </div>
           <div>
             <label>Senha</label>
-            <input type={'password'} />
+            <input onChange={(e) => setUserPassword(e.target.value)} value={userPassword} type={'password'} />
             <span>Use ao menos 8 caracteres contendo letras, números e ao menos um caracter especial</span>
           </div>
           <div>
             <label>Repetir a senha</label>
-            <input type={'password'} />
+            <input onChange={(e) => setUserRepeatPassword(e.target.value)} value={userRepeatPassword} type={'password'} />
             <span>Senha não confere</span>
           </div>
           <div className="registerBtn">
