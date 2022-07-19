@@ -22,7 +22,8 @@
 <!--te-->
 
 ## :file_folder: Acesso ao projeto
--
+
+Acesse o código fonte em: [GitHub-flashcards](https://github.com/matheushenriqueferreira/flashcards)
 
 ## :hammer_and_wrench: Abrir e rodar o projeto
 ### Pré-requisitos
