@@ -7,7 +7,20 @@ export const Register = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userRepeatPassword, setUserRepeatPassword] = useState('');
-  
+  const [msgRepeatPassword, setMsgRepeatPassword] = useState('');
+
+  const handleRepeatPassword = (repeatPassword) => {
+    if(repeatPassword === '') { 
+      setMsgRepeatPassword('');
+    }
+    else if(repeatPassword !== userPassword) {
+      setMsgRepeatPassword('Error');
+    }
+    else {
+      setMsgRepeatPassword('');
+    }
+  }
+
   return(
     <>
       <Navbar page={'Register'} btnText={'Entrar'} btnLink={'/login'}/>
@@ -32,8 +45,11 @@ export const Register = () => {
           </div>
           <div>
             <label>Repetir a senha</label>
-            <input onChange={(e) => setUserRepeatPassword(e.target.value)} value={userRepeatPassword} type={'password'} />
-            <span>Senha não confere</span>
+            <input id="registerRepPass" onChange={(e) => {
+              setUserRepeatPassword(e.target.value),
+              handleRepeatPassword(e.target.value)
+            }} value={userRepeatPassword} type={'password'} />
+            { msgRepeatPassword === 'Error' && <span>Senha não consefere</span>}
           </div>
           <div className="registerBtn">
             <button type="button">Cadastrar</button>
