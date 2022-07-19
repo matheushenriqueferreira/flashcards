@@ -4,3 +4,8 @@
   box-sizing: border-box;
 }
 
+body {
+  background: #2D294C;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+}
