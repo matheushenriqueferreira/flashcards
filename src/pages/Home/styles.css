@@ -1,0 +1,17 @@
+.homeMain {
+  padding: 80px;
+}
+
+.homeMain div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homeMain div:nth-child(1) h1 {
+  color: #746ACE;
+  font-size: 68px;
+}
+.homeMain div:nth-child(1) span {
+  font-size: 38px;
+}
