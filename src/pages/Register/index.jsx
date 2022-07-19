@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import './styles.css'
 
 export const Register = () => {
+  const [userName, setUserName] = useState('')
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [userRepeatPassword, setRepeatPassword] = useState('');
+  
   return(
     <>
       <Navbar page={'Register'} btnText={'Entrar'} btnLink={'/login'}/>
