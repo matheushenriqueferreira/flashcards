@@ -16,7 +16,7 @@ export const Navbar = ({ page, btnText, btnLink }) => {
             page === "Home" ?
             <>
               <button onClick={() => navigate('/register')} type="button">Cadastre-se</button>
-              <button type="button">Entrar</button>
+              <button onClick={() => navigate('/login')} type="button">Entrar</button>
             </>
             :
             page === "Register" || page === "Login" ?
