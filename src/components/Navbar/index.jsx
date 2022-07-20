@@ -6,8 +6,8 @@ export const Navbar = ({ page, btnText, btnLink }) => {
   const navigate = useNavigate();
   return(
     <header className="navbarHeader">
-      <nav>
-        <div>
+      <div className="navbarNav">
+        <div onClick={() => navigate('/')}>
           <i className="fa-solid fa-brain"></i>
           <span>QI Labs</span>
         </div>
@@ -27,7 +27,7 @@ export const Navbar = ({ page, btnText, btnLink }) => {
             null
           }
         </div>
-      </nav>
+      </div>
     </header>
   );
 }
