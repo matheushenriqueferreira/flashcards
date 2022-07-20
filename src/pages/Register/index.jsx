@@ -8,15 +8,43 @@ export const Register = () => {
   const [userPassword, setUserPassword] = useState('');
   const [userRepeatPassword, setUserRepeatPassword] = useState('');
   const [msgRepeatPassword, setMsgRepeatPassword] = useState('');
+  const [msgPassword, setMsgPassword] = useState('');
+  
+  const handlePassword = (password) => {
+    const input = document.getElementById('password');
+    console.log(password)
+    if(password !== '') {
+      if(String(password).length <8) {
+        input.style.border = '#e60000 2px solid';
+        setMsgPassword('Error')
+      }
+      else {
+        input.style.border = 'none';
+        setMsgPassword('');
+      }
+    }
+    else {
+      input.style.border = 'none';
+      setMsgPassword('');
+      //Caso o usuário limpar o input de senha, automaticamente limpará o campo repetir senha
+      document.getElementById('repeatPassword').style.border = 'none';
+      setMsgRepeatPassword('');
+      setUserRepeatPassword('');
+    }
+  }
 
   const handleRepeatPassword = (repeatPassword) => {
+    const input = document.getElementById('repeatPassword');
     if(repeatPassword === '') { 
+      input.style.border = 'none';
       setMsgRepeatPassword('');
     }
     else if(repeatPassword !== userPassword) {
+      input.style.border = '#e60000 2px solid'
       setMsgRepeatPassword('Error');
     }
     else {
+      input.style.border = 'none';
       setMsgRepeatPassword('');
     }
   }
@@ -40,16 +68,19 @@ export const Register = () => {
           </div>
           <div>
             <label>Senha</label>
-            <input onChange={(e) => setUserPassword(e.target.value)} value={userPassword} type={'password'} />
-            <span>Use ao menos 8 caracteres contendo letras, números e ao menos um caracter especial</span>
+            <input onChange={(e) => {
+              setUserPassword(e.target.value),
+              handlePassword(e.target.value)
+            }} value={userPassword} id={'password'} type={'password'} placeholder='Insira uma senha'/>
+            { msgPassword === 'Error' && <span>Use ao menos 8 caracteres contendo letras, números e ao menos um caracter especial</span> }
           </div>
           <div>
             <label>Repetir a senha</label>
-            <input id="registerRepPass" onChange={(e) => {
+            <input id="repeatPassword" onChange={(e) => {
               setUserRepeatPassword(e.target.value),
               handleRepeatPassword(e.target.value)
             }} value={userRepeatPassword} type={'password'} />
-            { msgRepeatPassword === 'Error' && <span>Senha não consefere</span>}
+            { msgRepeatPassword === 'Error' && <span>Senha não confere</span>}
           </div>
           <div className="registerBtn">
             <button type="button">Cadastrar</button>
