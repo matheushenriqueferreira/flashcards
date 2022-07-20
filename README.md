@@ -2,12 +2,18 @@
 
 <p align="center">
   <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/matheushenriqueferreira/flashcards?style=for-the-badge">
 </p>
 
 ## Descrição do Projeto
 -
 ## :white_check_mark: Funcionalidades do projeto
--
+- [ ] Cadastro de usuário
+- [ ] Autenticação de usuário
+- [ ] Criação/edição/exclusão de coleções de flashcards
+- [ ] Criação/edição/exclusão de flashcards
+- [ ] Busca de flashcards
+- [ ] Jogar
 ## Tabela de Conteúdo
 <!--ts-->
    * [Descrição do Projeto](#descrição-do-projeto)
