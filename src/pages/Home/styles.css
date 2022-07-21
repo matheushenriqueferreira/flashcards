@@ -24,6 +24,8 @@
   padding-left: 260px;
   font-size: 18px;
   font-weight: bold;
+  opacity: 1;
+  transition: opacity .8s ease-out;
 }
 
 .homeContainer3 {
@@ -33,14 +35,16 @@
   gap: 1em;
 }
 
-.homeYellow {
+.homeContainer3Yellow {
   display: flex;
   flex-direction: column;
   color: #FFFF00;
+  width: 180px;
   opacity: 1;
+  transition: opacity .8s ease-out;
 }
 
-.homeYellow span {
+.homeContainer3Yellow span {
   font-weight: bold;
   font-size: 18px;
   width: 140px;
@@ -48,11 +52,15 @@
   text-align: center;
 }
 
-.homeYellow i {
-  display: flex;
-  flex-direction: row-reverse;
-  width: 180px;
+.homeContainer3Yellow i {
+  position: relative;
+  width: min-content;
   font-size: 48px;
+  animation: arrowAnimation;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #homeFlashcard1 {
@@ -98,3 +106,12 @@
   opacity: 0;
 }
 
+@keyframes arrowAnimation {
+  from {
+    left: 0px;
+  }
+  
+  to {
+    left: 150px;
+  }
+}
