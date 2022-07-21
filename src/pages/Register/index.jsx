@@ -31,6 +31,26 @@ export const Register = () => {
     }
   }
 
+  //Exibe ou oculta o password ao clicar
+  const handleShowPassword = () => {
+    const iconEye = document.getElementById('showHidePassword');
+    const inputPassword = document.getElementById('password');
+    switch(iconEye.getAttribute('class')) {//Muda o icone de acordo com o nome da class
+      case 'fa-solid fa-eye-slash':
+        iconEye.className = 'fa-solid fa-eye';
+        inputPassword.type = 'text';
+      break;
+      case 'fa-solid fa-eye':
+        iconEye.className = 'fa-solid fa-eye-slash';
+        inputPassword.type = 'password';
+      break;
+      default:
+        iconEye.className = 'fa-solid fa-eye-slash';
+        inputPassword.type = 'password';
+      break;
+    }
+  }
+
   const handleRepeatPassword = (repeatPassword, inputStyle) => {
     if(repeatPassword === '') { 
       inputStyle.border = '0';
@@ -69,7 +89,14 @@ export const Register = () => {
               setUserPassword(e.target.value),
               handlePassword(e.target.value, e.target.style)
             }} value={userPassword} id={'password'} type={'password'} min={8} placeholder='Insira uma senha'/>
-            { msgPassword === 'Error' && <span>Use ao menos 8 caracteres contendo letras, números e ao menos um caracter especial</span> }
+            <div className="homePasswordContent">
+              <div>
+                { msgPassword === 'Error' && <span>Use ao menos 8 caracteres contendo letras, números e ao menos um caracter especial</span> }
+              </div>
+              <div>
+                <i id="showHidePassword" className="fa-solid fa-eye-slash" onClick={() => handleShowPassword()}></i>
+              </div>
+            </div>
           </div>
           <div>
             <label>Repetir a senha</label>

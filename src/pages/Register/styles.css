@@ -36,14 +36,39 @@
   padding-left: 10px;
 }
 
-.registerContainer2 div:nth-child(3) span {
-  color: #868E96;
-  font-size: 12px;
-}
 
 .registerContainer2 div:nth-child(4) span {
   color: #e60000;
   font-size: 12px;
+}
+
+.homePasswordContent {
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.homePasswordContent div:nth-child(1) {
+  color: #868E96;
+  font-size: 12px;
+  flex: 1;
+}
+
+.homePasswordContent div:nth-child(2) {
+  display: flex;
+  text-align: center;
+  gap: .1em;
+  align-items: center;
+}
+
+.homePasswordContent div:nth-child(2) span {
+  font-size: 12px;
+}
+
+#showHidePassword {
+  cursor: pointer;
+  color: #868E96;
+  padding-right: 5px;
 }
 
 .registerBtn {
