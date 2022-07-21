@@ -7,8 +7,26 @@ export const Register = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userRepeatPassword, setUserRepeatPassword] = useState('');
-  const [msgRepeatPassword, setMsgRepeatPassword] = useState('');
+  const [msgEmail, setMsgEmail] = useState('');
   const [msgPassword, setMsgPassword] = useState('');
+  const [msgRepeatPassword, setMsgRepeatPassword] = useState('');
+
+  const handleEmail = (email, inputStyle) => {
+    if(email !== '') {
+      if(/[a-zA-Z]+[0-9]*\b@[a-zA-Z]+(\.com\.br|\.com$)$/.test(email)) {
+        setMsgEmail('');
+        inputStyle.border = '0';
+      }
+      else {
+        setMsgEmail('Error');
+        inputStyle.border = '#e60000 2px solid';
+      }
+    }
+    else {
+      setMsgEmail('');
+      inputStyle.border = '0';
+    }
+  }
 
   const handlePassword = (password, inputStyle) => {
     if(password !== '') {
@@ -81,7 +99,11 @@ export const Register = () => {
           </div>
           <div>
             <label>E-mail</label>
-            <input onChange={(e) => setUserEmail(e.target.value)} value ={userEmail} type={'text'} placeholder='Insira o seu e-mail' />
+            <input onChange={(e) => {
+              setUserEmail(e.target.value),
+              handleEmail(e.target.value, e.target.style)
+            }} value ={userEmail} type={'text'} placeholder='you@email.com' />
+            { msgEmail === 'Error' && <span>E-mail inválido</span> }
           </div>
           <div>
             <label>Senha</label>
@@ -93,9 +115,7 @@ export const Register = () => {
               <div>
                 { msgPassword === 'Error' && <span>Use ao menos 8 caracteres contendo letras, números e ao menos um caracter especial</span> }
               </div>
-              <div>
                 <i id="showHidePassword" className="fa-solid fa-eye-slash" onClick={() => handleShowPassword()}></i>
-              </div>
             </div>
           </div>
           <div>
