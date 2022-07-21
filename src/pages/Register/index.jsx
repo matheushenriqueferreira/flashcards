@@ -9,42 +9,39 @@ export const Register = () => {
   const [userRepeatPassword, setUserRepeatPassword] = useState('');
   const [msgRepeatPassword, setMsgRepeatPassword] = useState('');
   const [msgPassword, setMsgPassword] = useState('');
-  
-  const handlePassword = (password) => {
-    const input = document.getElementById('password');
-    console.log(password)
+
+  const handlePassword = (password, inputStyle) => {
     if(password !== '') {
-      if(String(password).length <8) {
-        input.style.border = '#e60000 2px solid';
-        setMsgPassword('Error')
+      if(String(password).length > 7 && password.match(/([0-9])/) && password.match(/([a-zA-Z])/) && password.match(/([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/)) {
+        inputStyle.border = '0';
+        setMsgPassword('');
       }
       else {
-        input.style.border = 'none';
-        setMsgPassword('');
+        inputStyle.border = '#e60000 2px solid';
+        setMsgPassword('Error');
       }
     }
     else {
-      input.style.border = 'none';
+      inputStyle.border = '0';
       setMsgPassword('');
       //Caso o usuário limpar o input de senha, automaticamente limpará o campo repetir senha
-      document.getElementById('repeatPassword').style.border = 'none';
+      document.getElementById('repeatPassword').style.border = '0';
       setMsgRepeatPassword('');
       setUserRepeatPassword('');
     }
   }
 
-  const handleRepeatPassword = (repeatPassword) => {
-    const input = document.getElementById('repeatPassword');
+  const handleRepeatPassword = (repeatPassword, inputStyle) => {
     if(repeatPassword === '') { 
-      input.style.border = 'none';
+      inputStyle.border = '0';
       setMsgRepeatPassword('');
     }
     else if(repeatPassword !== userPassword) {
-      input.style.border = '#e60000 2px solid'
+      inputStyle.border = '#e60000 2px solid'
       setMsgRepeatPassword('Error');
     }
     else {
-      input.style.border = 'none';
+      inputStyle.border = '0';
       setMsgRepeatPassword('');
     }
   }
@@ -70,15 +67,15 @@ export const Register = () => {
             <label>Senha</label>
             <input onChange={(e) => {
               setUserPassword(e.target.value),
-              handlePassword(e.target.value)
-            }} value={userPassword} id={'password'} type={'password'} placeholder='Insira uma senha'/>
+              handlePassword(e.target.value, e.target.style)
+            }} value={userPassword} id={'password'} type={'password'} min={8} placeholder='Insira uma senha'/>
             { msgPassword === 'Error' && <span>Use ao menos 8 caracteres contendo letras, números e ao menos um caracter especial</span> }
           </div>
           <div>
             <label>Repetir a senha</label>
             <input id="repeatPassword" onChange={(e) => {
               setUserRepeatPassword(e.target.value),
-              handleRepeatPassword(e.target.value)
+              handleRepeatPassword(e.target.value, e.target.style)
             }} value={userRepeatPassword} type={'password'} />
             { msgRepeatPassword === 'Error' && <span>Senha não confere</span>}
           </div>
