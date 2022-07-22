@@ -40,6 +40,11 @@
   padding-left: 10px;
 }
 
+.registerContainer2 div:nth-child(1) span {
+  color: #868E96;
+  font-size: 12px;
+}
+
 .registerContainer2 div:nth-child(2) span {
   color: #868E96;
   font-size: 12px;
@@ -56,17 +61,10 @@
   width: 100%;
 }
 
-.homePasswordContent div:nth-child(1) {
+.homePasswordContent div {
   color: #868E96;
   font-size: 12px;
   flex: 1;
-}
-
-.homePasswordContent div:nth-child(2) {
-  display: flex;
-  text-align: center;
-  gap: .1em;
-  align-items: center;
 }
 
 .homePasswordContent div:nth-child(2) span {
@@ -94,4 +92,10 @@
   width: 115px;
   height: 35px;
   cursor: pointer;
+  transition: opacity 1s ease-in;
+}
+
+.registerBtn button:disabled {
+  opacity: 0.2;
+  cursor: no-drop;
 }

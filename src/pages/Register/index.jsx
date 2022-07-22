@@ -1,20 +1,37 @@
 import React, { useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import './styles.css'
+import { firebase } from "../../firebase/firebase";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 export const Register = () => {
   const [userName, setUserName] = useState('')
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userRepeatPassword, setUserRepeatPassword] = useState('');
+  const [msgName, setMsgName] = useState('');
   const [msgEmail, setMsgEmail] = useState('');
   const [msgPassword, setMsgPassword] = useState('');
   const [msgRepeatPassword, setMsgRepeatPassword] = useState('');
 
+  const handleName = (name) => {
+    if(name !== '') {
+      if(String(name).length <= 3 || name.match(/[0-9]/) || name.match(/([~,!,@,#,$,%,^,&,*,\-,_,+,=,?,>,<,\.,\/,\\,\(,\),\{,\},\;,\:,\",¨,\º])/)) {
+        setMsgName('Error');
+      }
+      else {
+        setMsgName('Ok');
+      }
+    }
+    else {
+      setMsgName('');
+    }
+  }
+
   const handleEmail = (email, inputStyle) => {
     if(email !== '') {
       if(/[a-zA-Z]+[0-9]*\b@[a-zA-Z]+(\.com\.br|\.com$)$/.test(email)) {
-        setMsgEmail('');
+        setMsgEmail('Ok');
         inputStyle.border = '0';
       }
       else {
@@ -32,7 +49,7 @@ export const Register = () => {
     if(password !== '') {
       if(String(password).length > 7 && password.match(/([0-9])/) && password.match(/([a-zA-Z])/) && password.match(/([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/)) {
         inputStyle.border = '0';
-        setMsgPassword('');
+        setMsgPassword('Ok');
       }
       else {
         inputStyle.border = '#e60000 2px solid';
@@ -42,7 +59,11 @@ export const Register = () => {
     else {
       inputStyle.border = '0';
       setMsgPassword('');
-      //Caso o usuário limpar o input de senha, automaticamente limpará o campo repetir senha
+    }
+    
+    if(userRepeatPassword !== '') {
+      /*Caso o usuário fazer qualquer alterção no input de senha
+      e o input repeatPassword estiver preenchido, ele será resetado*/
       document.getElementById('repeatPassword').style.border = '0';
       setMsgRepeatPassword('');
       setUserRepeatPassword('');
@@ -65,7 +86,6 @@ export const Register = () => {
       default:
         iconEye.className = 'fa-solid fa-eye-slash';
         inputPassword.type = 'password';
-      break;
     }
   }
 
@@ -80,8 +100,29 @@ export const Register = () => {
     }
     else {
       inputStyle.border = '0';
-      setMsgRepeatPassword('');
+      setMsgRepeatPassword('Ok');
     }
+  }
+
+  
+
+  const handleRegisterUser = async () => {
+    const auth = getAuth(firebase);
+    createUserWithEmailAndPassword(auth, userEmail, userPassword)
+      .then((response) => {
+        alert(response.user.email);
+      })
+      .catch((error) => {
+        switch(error.code) {
+          case 'auth/invalid-email':
+            alert('E-mail inválido.');
+          break;
+          case 'auth/email-already-in-use':
+            alert(`O E-mail: ${userEmail} já está em uso.`);
+          break;
+          default: alert(error.code);
+        }
+      });
   }
 
   return(
@@ -95,7 +136,11 @@ export const Register = () => {
         <div className="registerContainer2">
           <div>
             <label>Nome</label>
-            <input onChange={(e) => setUserName(e.target.value)} value={userName} type={'text'} placeholder='Insira o seu nome completo'/>
+            <input onChange={(e) => {
+              setUserName(e.target.value)
+              handleName(e.target.value)
+            }} value={userName} type={'text'} placeholder='Insira o seu nome completo'/>
+            { msgName === 'Error' && <span>Use ao menos 4 caracteres contendo apenas letras</span> }
           </div>
           <div>
             <label>E-mail</label>
@@ -115,7 +160,7 @@ export const Register = () => {
               <div>
                 { msgPassword === 'Error' && <span>Use ao menos 8 caracteres contendo letras, números e ao menos um caracter especial</span> }
               </div>
-                <i id="showHidePassword" className="fa-solid fa-eye-slash" onClick={() => handleShowPassword()}></i>
+              <i id="showHidePassword" className="fa-solid fa-eye-slash" onClick={() => handleShowPassword()}></i>
             </div>
           </div>
           <div>
@@ -127,7 +172,12 @@ export const Register = () => {
             { msgRepeatPassword === 'Error' && <span>Senha não confere</span>}
           </div>
           <div className="registerBtn">
-            <button type="button">Cadastrar</button>
+            {
+              msgName === 'Ok' && msgEmail === 'Ok' && msgPassword === 'Ok' && msgRepeatPassword === 'Ok' ?
+              <button type="button" onClick={() => handleRegisterUser()}>Cadastrar</button>
+              :
+              <button type="button" disabled>Cadastrar</button>
+            }
           </div>
         </div>
       </main>
