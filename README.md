@@ -8,7 +8,7 @@
 ## Descrição do Projeto
 -
 ## :white_check_mark: Funcionalidades do projeto
-- [ ] Cadastro de usuário
+- [x] Cadastro de usuário: *Por enquanto está salvando apenas o email e senha no firebase
 - [ ] Autenticação de usuário
 - [ ] Criação/edição/exclusão de coleções de flashcards
 - [ ] Criação/edição/exclusão de flashcards
@@ -33,7 +33,9 @@ Acesse o código fonte em: [GitHub-flashcards](https://github.com/matheushenriqu
 
 ## :hammer_and_wrench: Abrir e rodar o projeto
 ### Pré-requisitos
-Antes de começar, você precisar instalar em sua máquina as seguintes ferramentas:
+Antes de começar, você precisar ter uma conta no [Google](https://accounts.google.com/) para criação de um projeto no [Firebase](https://firebase.google.com/){Tutorial para criação em breve}.
+<br/>
+Instalar em sua máquina as seguintes ferramentas:
 [Node.js](https://nodejs.org/en/) e um editor de código de sua preferência para desenvolvimento, no caso para esse projeto eu utilizei o [Visual Studio Code](https://code.visualstudio.com/).
 
 ### Rodar aplicação
