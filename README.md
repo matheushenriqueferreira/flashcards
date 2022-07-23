@@ -55,6 +55,7 @@ Instalar em sua máquina as seguintes ferramentas:
 - [Bootstrap](https://getbootstrap.com/)
 - [Vite + React](https://vitejs.dev/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Redux](https://react-redux.js.org/)
 - [Google Firebase](https://firebase.google.com/)
 
 ## :man_technologist: Autor
