@@ -4,15 +4,15 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     userEmail: '',
-    userLogged: 'notLogged'
+    userLogged: false
   },
   reducers: {
     login: (state, action) => {
       const { email } = action.payload;
-      return {userEmail: email, userLogged: 'logged'}
+      return {userEmail: email, userLogged: true}
     },
     logout: (state, action) => {
-      return {userEmail: '', userLogged: 'notLogged'}
+      return {userEmail: '', userLogged: false}
     }
   }
 })
