@@ -59,4 +59,10 @@
   width: 115px;
   height: 35px;
   cursor: pointer;
+  transition: opacity 1s ease-in;
+}
+
+.loginBtn button:disabled {
+  opacity: 0.2;
+  cursor: no-drop;
 }

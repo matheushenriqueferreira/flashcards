@@ -10,10 +10,30 @@ import { useNavigate } from "react-router-dom";
 export const Login = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [msgEmail, setMsgEmail] = useState('');
+  const [msgPassword, setMsgPassword] = useState('');
   const [msgLogin, setMsgLogin] = useState('')
   const [loading, setLoading] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleEmail = (email) => {
+    if(email !== '') {
+      setMsgEmail('Ok');
+    }
+    else {
+      setMsgEmail('');
+    }
+  }
+
+  const handlePassword = (password) => {
+    if(password !== '') {
+      setMsgPassword('Ok');
+    }
+    else {
+      setMsgPassword('');
+    }
+  }
 
   const handleShowPassword = () => {
     const iconEye = document.getElementById('showHidePassword');
@@ -59,11 +79,17 @@ export const Login = () => {
         <div className="loginContainer2">
           <div>
             <label>E-mail</label>
-            <input onChange={(e) => setUserEmail(e.target.value)} value={userEmail} type={'text'} placeholder='Insira o seu e-mail' />
+            <input onChange={(e) => {
+              setUserEmail(e.target.value),
+              handleEmail(e.target.value)
+            }} value={userEmail} type={'text'} placeholder='Insira o seu e-mail' />
           </div>
           <div>
             <label>Senha</label>
-            <input onChange={(e) => setUserPassword(e.target.value)} value={userPassword} id="password" type={'password'} placeholder='Insira a sua senha' />
+            <input onChange={(e) => { 
+              setUserPassword(e.target.value),
+              handlePassword(e.target.value)
+            }} value={userPassword} id="password" type={'password'} placeholder='Insira a sua senha' />
             <div className="loginPasswordContent">
               <div>
                 { msgLogin === 'Error' && <span>Senha inválida. Por favor, verifique se o endereço de e-mail e/ou senha são válidos</span>}
@@ -80,7 +106,10 @@ export const Login = () => {
                 </div>
               </>
               :
-              <button type="button" onClick={() => handleLogin()}>Entrar</button>
+              msgEmail === 'Ok' && msgPassword === 'Ok' ?
+                <button type="button" onClick={() => handleLogin()}>Entrar</button>
+              :
+              <button type="button" disabled>Entrar</button>
             }
           </div>
         </div>
