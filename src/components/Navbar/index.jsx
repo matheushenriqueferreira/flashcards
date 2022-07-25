@@ -21,14 +21,14 @@ export const Navbar = ({ page, btnText, btnLink }) => {
             page === "Register" || page === "Login" ?
               <button onClick={() => navigate(btnLink)} type="button">{btnText}</button>
             :
-            page === "Home" && userLogged === 'notLogged' ?
+            page === "Home" && userLogged === false ?
             <>
               <button onClick={() => navigate('/register')} type="button">Cadastre-se</button>
               <button onClick={() => navigate('/login')} type="button">Entrar</button>
             </>
             :
             <>
-              <button onClick={() => navigate('')} type="button">Minhas Coleções</button>
+              <button onClick={() => navigate('/')} type="button">Minhas Coleções</button>
               <button onClick={() => dispatch(logout())} type="button">Sair</button>
             </>
           }
