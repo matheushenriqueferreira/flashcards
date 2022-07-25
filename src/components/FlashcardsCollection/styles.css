@@ -1,0 +1,53 @@
+#flashcardsCollection {
+  display: flex;
+  flex-direction: column;
+  gap: .8em;
+  background: #ffffff;
+  width: 200px;
+  height: 300px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#flashcardsCollection div:first-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fa-pencil {
+  cursor: pointer;
+  font-size: 22px;
+  color: #4472C4;
+}
+
+#flashcardsCollection div:nth-child(2) {
+  width: 100%;
+  height: 180px;
+}
+
+.collectionImage {
+  width: 100%;
+  height: 100%;
+}
+
+#flashcardsCollection div:nth-child(3) {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: #27ACA7;
+  font-weight: bold;
+  text-size-adjust: auto;
+}
+
+#flashcardsCollection div:last-child {
+  display: flex;
+  justify-content: flex-end;
+  color: #FF1818;
+}
+
+.fa-trash-can {
+  cursor: pointer;
+  font-size: 22px;
+  color: #FF1818;
+}
