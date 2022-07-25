@@ -108,6 +108,39 @@
   transition: opacity 1s ease-in;
 }
 
+.homeMainLogged {
+  width: 1200px;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+}
+
+.homeContainer1Logged {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.homeContainer1Logged button {
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  background: #5E5796;
+  width: 145px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.homeContainer2Logged {
+  display: flex;
+  flex-direction: row;
+  gap: 4em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 @keyframes arrowAnimation {
   from {
     left: 0px;

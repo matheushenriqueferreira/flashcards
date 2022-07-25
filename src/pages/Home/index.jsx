@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import './styles.css'
 import { Navbar } from "../../components/Navbar";
 import { useSelector } from "react-redux";
+import { FlashcardsCollection } from "../../components/flashcardsCollection";
+
 
 export const Home = () => {
-  const { userLogged } = useSelector(state => state.user);;
+  const { userLogged } = useSelector(state => state.user);
 
   const handleClickFlashcard1 = () => {
     const homeContainer2 = document.querySelector('.homeContainer2');
@@ -20,13 +22,13 @@ export const Home = () => {
   }
 
   useEffect(() => {
-    userLogged === 'logged' && console.log('logado')
+    userLogged === true && console.log('logado')
   }, [])
 
   return(
     <>
       {
-        userLogged === 'notLogged' ?
+        userLogged === false ?
         <>
           <Navbar page={'Home'} />
           <main className="homeMain">
@@ -59,8 +61,14 @@ export const Home = () => {
         :
         <>
           <Navbar page={'Home'} />
-          <main className="homeMain">
-            <h1>teste</h1>
+          <main className="homeMainLogged">
+            <div className="homeContainer1Logged">
+              <button type="button">Nova Coleção</button>
+            </div>
+            <div className="homeContainer2Logged">
+              <FlashcardsCollection />
+              <FlashcardsCollection />
+            </div>
           </main>
         </>
       }
