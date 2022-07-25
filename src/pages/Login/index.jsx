@@ -11,8 +11,9 @@ export const Login = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [msgLogin, setMsgLogin] = useState('')
+  const [loading, setLoading] = useState('');
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleShowPassword = () => {
     const iconEye = document.getElementById('showHidePassword');
@@ -35,6 +36,7 @@ export const Login = () => {
 
   const handleLogin = () => {
     setMsgLogin('');
+    setLoading('Loading');
     const auth = getAuth(firebase);
     signInWithEmailAndPassword(auth, userEmail, userPassword)
       .then(() => {
@@ -42,6 +44,7 @@ export const Login = () => {
         navigate('/');
       })
       .catch((error) => {
+        setLoading('');
         setMsgLogin('Error');
       });
   }
@@ -69,7 +72,16 @@ export const Login = () => {
             </div>
           </div>
           <div className="loginBtn">
-            <button type="button" onClick={() => handleLogin()}>Entrar</button>
+            {
+              loading === 'Loading' ?
+              <>
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </>
+              :
+              <button type="button" onClick={() => handleLogin()}>Entrar</button>
+            }
           </div>
         </div>
       </main>
