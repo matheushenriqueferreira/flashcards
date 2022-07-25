@@ -46,6 +46,7 @@
   filter: brightness(90%);
   transition: filter .2s;
 }
+
 .navbarButtons button:hover {
   filter: brightness(100%);
 }
