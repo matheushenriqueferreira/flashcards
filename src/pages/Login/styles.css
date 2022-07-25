@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   margin: 80px 28% 80px 28%;
-  gap: 5em;
+  gap: 7em;
 }
 
 .loginContainer1 {
@@ -23,6 +23,10 @@
   gap: 1.8em;
 }
 
+.loginContainer2 div {
+  height: 60px;
+}
+
 .loginContainer2 div input {
   height: 30px;
   width: 100%;
@@ -32,9 +36,16 @@
   padding-left: 10px;
 }
 
-.loginContainer2 div:nth-child(2) span {
+.loginPasswordContent {
+  display: flex;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.loginPasswordContent div {
   color: #e60000;
   font-size: 12px;
+  flex: 1;
 }
 
 .loginBtn {
