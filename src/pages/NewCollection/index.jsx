@@ -14,35 +14,52 @@ export const NewCollection = () => {
   const [collectionName, setCollectionName] = useState('');
   const [collectionDescription, setCollectionDescription] = useState('');
   const [collectionImage, setCollectionImage] = useState();
-  const [collectionImageUrl, setCollectionImageUrl] = useState('');
   const [imageName, setImageName] = useState('Escolha uma imagem para a coleção criada...');
-  const [imageUploadProgress, setImageUploadProgress] = useState('0');
-  const [uuid] = useState(uuidv1());
+  const [imageSelectionProgress, setImageSelectionProgress] = useState('0');
+  const [uuid] = useState(uuidv1());//usado para criação da ID uníca do flashcardCollection e também no nome da imagem salva no storage
   const flashcardCollection = collection(firestore, 'flashcardCollection');
-  const storage = getStorage(firebase);
-  const flashcardCollectionImage = ref(storage, `flashcardCollectionImage/${userEmail}/${uuid}`);
+  const [loading, setLoading] = useState('');
 
   const handleRegisterCollection = () => {
-    const data = {
-      userEmail,
-      collectionName, 
-      collectionDescription,
-      collectionImageUrl//Url da imagem que foi salva no storage do firebase
-    }
+    setLoading('Loading');
+    const storage = getStorage(firebase)
+    const flashcardCollectionImage = ref(storage, `flashcardCollectionImage/${userEmail}/${uuid}`);
     
-    setDoc(doc(flashcardCollection, uuid), data)
-      .then(() => {
-        navigate('/');
-      })
-      .catch((error) => {
-        alert(error.code);
-      });
+    const metadata = {//Como a imagem salva no storage é a uuid cria-se metada para slavar o nome real da imagem selecionada
+      customMetadata: {
+        name: collectionImage.name
+      }
+    }
+    const uploadTask = uploadBytesResumable(flashcardCollectionImage, collectionImage, metadata)
+    uploadTask.on('state_changed', null, error => {alert(error.code)}, () => {
+      getDownloadURL(uploadTask.snapshot.ref)
+        .then(url => {
+          const data = {
+            userEmail,
+            collectionName,
+            collectionDescription,
+            collectionImageUrl: url
+          }
+          setDoc(doc(flashcardCollection, uuid), data)
+            .then(() => {
+              navigate('/');
+            })
+            .catch((error) => {
+              alert(error.code);
+              setLoading('');
+            });
+        })
+        .catch((error) => {
+          alert(error.code);
+          setLoading('');
+        })
+    });
   }
 
   useEffect(() => {
     const fildset = document.querySelector('.newCollectionProgress');
     const btnCancel = document.querySelector('.newCollectionBtnCancel');
-    setImageUploadProgress('0');
+    setImageSelectionProgress('0');
     if(collectionImage !== undefined) {//Para evitar erro caso o usuário clicar no input type:file e cancelar
       /* setImageName(collectionImage.name) abaixo insere o nome da imagem selecionada na 
       <div id="inputFileContainer">
@@ -55,7 +72,7 @@ export const NewCollection = () => {
      fildset.removeAttribute('disabled');
      btnCancel.removeAttribute('disabled');
      setImageName(collectionImage.name);
-     setImageUploadProgress('100');
+     setImageSelectionProgress('100');
     }
     else {
       fildset.setAttribute('disabled', '');
@@ -94,7 +111,7 @@ export const NewCollection = () => {
               </div>
               <fieldset className="newCollectionProgress" disabled>
                 <div className="progress">
-                  <div className="progress-bar" role="progressbar" aria-label="Success example" style={{width: `${imageUploadProgress}%`}} aria-valuenow={imageUploadProgress} aria-valuemin="0" aria-valuemax="100"></div>
+                  <div className="progress-bar" role="progressbar" aria-label="Success example" style={{width: `${imageSelectionProgress}%`}} aria-valuenow={imageSelectionProgress} aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div>
                   <button className="newCollectionBtnCancel" onClick={() => setCollectionImage(undefined)}>
@@ -106,8 +123,13 @@ export const NewCollection = () => {
           </div>
           <div className="newCollectionBtn">
             {
-              collectionName !== '' && collectionDescription !== '' && collectionImageUrl !== '' ?
+              collectionName !== '' && collectionDescription !== '' && imageSelectionProgress === '100' && loading === '' ?
               <button type="button" onClick={() => handleRegisterCollection()}>Cadastrar</button>
+              :
+              loading === 'Loading' ?
+              <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+              </div>
               :
               <button type="button" disabled>Cadastrar</button>
             }
