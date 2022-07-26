@@ -101,3 +101,36 @@ input[type=file] {
   opacity: 0.2;
   cursor: no-drop;
 }
+
+.newCollectionProgress {
+  display: flex;
+  align-items: center;
+  gap: .8em;
+  transition: opacity 1s ease-in;
+}
+
+.newCollectionProgress:disabled {
+  opacity: .2;
+}
+
+.newCollectionProgress .progress {
+  flex: 1;
+}
+
+.newCollectionProgress div:nth-child(2) button {
+  display: flex;
+  align-items: center;
+  background: 0;
+  border: 0;
+  cursor: pointer;
+  margin-right: 2px;
+  opacity: .9;
+}
+
+.newCollectionProgress div:nth-child(2) button:disabled {
+  cursor: no-drop;
+}
+
+.fa-ban {
+  color: #FF0000;
+}

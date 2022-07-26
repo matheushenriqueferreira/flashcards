@@ -40,43 +40,26 @@ export const NewCollection = () => {
   }
 
   useEffect(() => {
+    const fildset = document.querySelector('.newCollectionProgress');
+    const btnCancel = document.querySelector('.newCollectionBtnCancel');
     setImageUploadProgress('0');
-    setCollectionImageUrl('');
     if(collectionImage !== undefined) {//Para evitar erro caso o usuário clicar no input type:file e cancelar
       /* setImageName(collectionImage.name) abaixo insere o nome da imagem selecionada na 
-        <div id="inputFileContainer">
-         --> <span>{imageName}</span> <--
-          .
-          .
-          .
-        </div>
+      <div id="inputFileContainer">
+      --> <span>{imageName}</span> <--
+      .
+      .
+      .
+      </div>
       */
-      setImageName(collectionImage.name);
-      const metadata = {
-        customMetadata: {
-          'name': collectionImage.name
-        }
-      };
-
-      const uploadTask = uploadBytesResumable(flashcardCollectionImage, collectionImage, metadata)
-      uploadTask.on('state_changed', (snapshot) => {
-        setImageUploadProgress(String((snapshot.bytesTransferred / snapshot.totalBytes) * 100));
-      },
-      (error) => {
-        alert(error);
-      },
-      () => {
-        //Depois que o upload for concluido, será feito o download da imagem, para salvarmos o url dela para ser usado posteriormente
-        getDownloadURL(uploadTask.snapshot.ref)
-          .then((url) => {
-            setCollectionImageUrl(url);//Insere a url
-          })
-          .catch((error) => {
-            alert(error.code);
-          });
-      });
+     fildset.removeAttribute('disabled');
+     btnCancel.removeAttribute('disabled');
+     setImageName(collectionImage.name);
+     setImageUploadProgress('100');
     }
     else {
+      fildset.setAttribute('disabled', '');
+      btnCancel.setAttribute('disabled', '');
       setImageName('Escolha uma imagem para a coleção criada...');
     }
   }, [collectionImage])
@@ -95,11 +78,11 @@ export const NewCollection = () => {
             <div className="newCollectionInput">
               <div>
                 <label>Nome coleção</label>
-                <input onChange={(e) => setCollectionName(e.target.value)} value={collectionName} id="inputCollectionName" type={'text'} placeholder='Insira o nome da coleção' />
+                <input onChange={(e) => setCollectionName(e.target.value)} value={collectionName} id="inputCollectionName" type={'text'} placeholder='Insira o nome da coleção' autoComplete="Off" />
               </div>
               <div>
                 <label>Descrição</label>
-                <textarea onChange={(e) => setCollectionDescription(e.target.value)} value={collectionDescription} id="textareaCollectionDetails"  placeholder='Descreva os detalhes da coleção' />
+                <textarea onChange={(e) => setCollectionDescription(e.target.value)} value={collectionDescription} id="textareaCollectionDetails"  placeholder='Descreva os detalhes da coleção' autoComplete="Off"/>
               </div>
               <div>
                 <label>Imagem</label>
@@ -109,9 +92,16 @@ export const NewCollection = () => {
                   <input onChange={(e) => setCollectionImage(e.target.files[0])} id="newCollectionInputFile" type={'file'} accept={'.png, .jpeg, .jpg'} />
                 </div>
               </div>
-              <div className="progress">
-                <div className="progress-bar bg-success" role="progressbar" aria-label="Success example" style={{width: `${imageUploadProgress}%`}} aria-valuenow={imageUploadProgress} aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
+              <fieldset className="newCollectionProgress" disabled>
+                <div className="progress">
+                  <div className="progress-bar" role="progressbar" aria-label="Success example" style={{width: `${imageUploadProgress}%`}} aria-valuenow={imageUploadProgress} aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div>
+                  <button className="newCollectionBtnCancel" onClick={() => setCollectionImage(undefined)}>
+                    <i className="fa-solid fa-ban"></i>
+                  </button>
+                </div>
+              </fieldset>
             </div>
           </div>
           <div className="newCollectionBtn">
