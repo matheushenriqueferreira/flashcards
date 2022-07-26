@@ -3,10 +3,12 @@ import './styles.css'
 import { Navbar } from "../../components/Navbar";
 import { useSelector } from "react-redux";
 import { FlashcardsCollection } from "../../components/flashcardsCollection";
+import { useNavigate } from "react-router-dom";
 
 
 export const Home = () => {
   const { userLogged } = useSelector(state => state.user);
+  const navigate = useNavigate();
 
   const handleClickFlashcard1 = () => {
     const homeContainer2 = document.querySelector('.homeContainer2');
@@ -27,50 +29,45 @@ export const Home = () => {
 
   return(
     <>
+      <Navbar page={'Home'} />
       {
         userLogged === false ?
-        <>
-          <Navbar page={'Home'} />
-          <main className="homeMain">
-            <div className="homeContainer1">
-              <h1>Mind Booster</h1>
-              <span>Treine a sua memória com Flash Cards!</span>
+        <main className="homeMain">
+          <div className="homeContainer1">
+            <h1>Mind Booster</h1>
+            <span>Treine a sua memória com Flash Cards!</span>
+          </div>
+          <div className="homeContainer2">
+            <span>Como se chama carro em inglês?</span>
+          </div>
+          <div className="homeContainer3">
+            <div className="homeContainer3Yellow">
+              <span>Clique no cartão para descobrir</span>
+              <i className="fa-solid fa-arrow-right"></i>
             </div>
-            <div className="homeContainer2">
-              <span>Como se chama carro em inglês?</span>
-            </div>
-            <div className="homeContainer3">
-              <div className="homeContainer3Yellow">
-                <span>Clique no cartão para descobrir</span>
-                <i className="fa-solid fa-arrow-right"></i>
+            <div>
+              <div className="homeFlashcards" id="homeFlashcard1" onClick={() => handleClickFlashcard1()}>
+                <span>Carro</span>
               </div>
-              <div>
-                <div className="homeFlashcards" id="homeFlashcard1" onClick={() => handleClickFlashcard1()}>
-                  <span>Carro</span>
-                </div>
-                <i className="fa-solid fa-right-long"></i>
-                <div className="homeFlashcards" id="homeFlashcard2">
-                  <span>Carro</span>
-                  <hr></hr>
-                  <span>Car</span>
-                </div>
+              <i className="fa-solid fa-right-long"></i>
+              <div className="homeFlashcards" id="homeFlashcard2">
+                <span>Carro</span>
+                <hr></hr>
+                <span>Car</span>
               </div>
             </div>
-          </main>
-        </>
+          </div>
+        </main>
         :
-        <>
-          <Navbar page={'Home'} />
-          <main className="homeMainLogged">
-            <div className="homeContainer1Logged">
-              <button type="button">Nova Coleção</button>
-            </div>
-            <div className="homeContainer2Logged">
-              <FlashcardsCollection />
-              <FlashcardsCollection />
-            </div>
-          </main>
-        </>
+        <main className="homeMainLogged">
+          <div className="homeContainer1Logged">
+            <button onClick={() => navigate('/newCollection')} type="button">Nova Coleção</button>
+          </div>
+          <div className="homeContainer2Logged">
+            <FlashcardsCollection />
+            <FlashcardsCollection />
+          </div>
+        </main>
       }
     </>
   );
