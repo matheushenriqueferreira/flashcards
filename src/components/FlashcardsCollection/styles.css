@@ -37,7 +37,7 @@
   flex-wrap: wrap;
   color: #27ACA7;
   font-weight: bold;
-  text-size-adjust: auto;
+  font-size: 24px;
 }
 
 #flashcardsCollection div:last-child {
