@@ -57,6 +57,7 @@ Instalar em sua máquina as seguintes ferramentas:
 - [Redux Toolkit](https://redux-toolkit.js.org/)
 - [React Redux](https://react-redux.js.org/)
 - [Google Firebase](https://firebase.google.com/)
+- [UUID](https://www.npmjs.com/package/uuid)
 
 ## :man_technologist: Autor
 
