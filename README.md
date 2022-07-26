@@ -2,18 +2,25 @@
 
 <p align="center">
   <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
+</p>
+<p align="center">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/matheushenriqueferreira/flashcards?style=for-the-badge">
 </p>
 
 ## Descrição do Projeto
--
+
+<p align="center">Uma aplicação que possibilita a criação de flashcards para ajudar na memorização e aprendizagem.</p>
+<p align="center">🧠📚</p>
+
 ## :white_check_mark: Funcionalidades do projeto
+
 - [x] Cadastro de usuário: *Por enquanto está salvando apenas o email e senha no firebase
 - [x] Autenticação de usuário
 - [ ] Criação/edição/exclusão de coleções de flashcards
 - [ ] Criação/edição/exclusão de flashcards
 - [ ] Busca de flashcards
 - [ ] Jogar
+
 ## Tabela de Conteúdo
 <!--ts-->
    * [Descrição do Projeto](#descrição-do-projeto)
