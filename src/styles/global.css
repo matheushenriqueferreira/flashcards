@@ -9,3 +9,7 @@ body {
   font-family: 'Roboto', sans-serif;
   color: #ffffff;
 }
+
+input, textarea {
+  font-size: 14px;
+}
