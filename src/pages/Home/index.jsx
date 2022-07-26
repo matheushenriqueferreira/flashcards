@@ -4,8 +4,9 @@ import { Navbar } from "../../components/Navbar";
 import { useSelector } from "react-redux";
 import { FlashcardsCollection } from "../../components/flashcardsCollection";
 import { useNavigate } from "react-router-dom";
-import { firebase, firestore } from '../../firebase/firebase';
-import { doc, onSnapshot, collection, query, where } from "firebase/firestore";
+import { firestore } from '../../firebase/firebase';
+import { onSnapshot, collection, query, where } from "firebase/firestore";
+import { Modal } from '../../components/Modal';
 
 export const Home = () => {
   const { userEmail, userLogged } = useSelector(state => state.user);
@@ -24,6 +25,8 @@ export const Home = () => {
     whiteArrow.style.opacity = '1';
     homeFlashcard2.style.opacity = '1';
   }
+
+
 
   useEffect(() => {
     if(userLogged === true) {
@@ -84,6 +87,7 @@ export const Home = () => {
               flashcardCollection.map(item => <FlashcardsCollection key={item.id} collectionName={item.collectionName} collectionImageUrl={item.collectionImageUrl} />)
             }
           </div>
+          <Modal title={'Exclusão'} text={'Tem certeza que deseja remover essa coleção? Isso excluirá todos os cartões contidos nela.'}  />
         </main>
       }
     </>
