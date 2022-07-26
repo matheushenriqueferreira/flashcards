@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import './styles.css'
 import { Navbar } from "../../components/Navbar";
 import { useSelector } from "react-redux";
 import { FlashcardsCollection } from "../../components/flashcardsCollection";
 import { useNavigate } from "react-router-dom";
-
+import { firebase, firestore } from '../../firebase/firebase';
+import { doc, onSnapshot, collection, query, where } from "firebase/firestore";
 
 export const Home = () => {
-  const { userLogged } = useSelector(state => state.user);
+  const { userEmail, userLogged } = useSelector(state => state.user);
   const navigate = useNavigate();
-
+  const [flashcardCollection, setFlashcardCollection] = useState([]);
+  
   const handleClickFlashcard1 = () => {
     const homeContainer2 = document.querySelector('.homeContainer2');
     const homeContainer3Yellow = document.querySelector('.homeContainer3Yellow');
@@ -24,7 +26,21 @@ export const Home = () => {
   }
 
   useEffect(() => {
-    userLogged === true && console.log('logado')
+    if(userLogged === true) {
+      const myCollections = [];
+      const db = collection(firestore, 'flashcardCollection');
+      const q = query(db, where("userEmail", "==", userEmail));//Query para trazer do bd apenas flshcardsCollection que estejam atreladas ao email do user
+      onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const data = {
+            ...doc.data(),
+            id: doc.id  
+          }
+          myCollections.push(data);
+        })
+        setFlashcardCollection(myCollections);
+      });
+    }
   }, [])
 
   return(
@@ -64,8 +80,9 @@ export const Home = () => {
             <button onClick={() => navigate('/newCollection')} type="button">Nova Coleção</button>
           </div>
           <div className="homeContainer2Logged">
-            <FlashcardsCollection />
-            <FlashcardsCollection />
+            {
+              flashcardCollection.map(item => <FlashcardsCollection key={item.id} collectionName={item.collectionName} collectionImageUrl={item.collectionImageUrl} />)
+            }
           </div>
         </main>
       }
