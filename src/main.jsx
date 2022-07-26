@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { Home } from './pages/Home';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
+import { NewCollection } from './pages/NewCollection'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/' element={<Home/>} />
         <Route path='/register' element={<Register/>} />
         <Route path='/login' element={<Login/>} />
+        <Route path='/newCollection' element={<NewCollection/>} />
       </Routes>
     </BrowserRouter>
   </Provider>
