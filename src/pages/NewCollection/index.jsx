@@ -57,27 +57,29 @@ export const NewCollection = () => {
   }
 
   useEffect(() => {
-    const fildset = document.querySelector('.newCollectionProgress');
-    const btnCancel = document.querySelector('.newCollectionBtnCancel');
-    setImageSelectionProgress('0');
-    if(collectionImage !== undefined) {//Para evitar erro caso o usuário clicar no input type:file e cancelar
-      /* setImageName(collectionImage.name) abaixo insere o nome da imagem selecionada na 
-      <div id="inputFileContainer">
-      --> <span>{imageName}</span> <--
-      .
-      .
-      .
-      </div>
-      */
-     fildset.removeAttribute('disabled');
-     btnCancel.removeAttribute('disabled');
-     setImageName(collectionImage.name);
-     setImageSelectionProgress('100');
-    }
-    else {
-      fildset.setAttribute('disabled', '');
-      btnCancel.setAttribute('disabled', '');
-      setImageName('Escolha uma imagem para a coleção criada...');
+    if(userLogged === true) {
+      const fildset = document.querySelector('.newCollectionProgress');
+      const btnCancel = document.querySelector('.newCollectionBtnCancel');
+      setImageSelectionProgress('0');
+      if(collectionImage !== undefined) {//Para evitar erro caso o usuário clicar no input type:file e cancelar
+        /* setImageName(collectionImage.name) abaixo insere o nome da imagem selecionada na 
+        <div id="inputFileContainer">
+        --> <span>{imageName}</span> <--
+        .
+        .
+        .
+        </div>
+        */
+      fildset.removeAttribute('disabled');
+      btnCancel.removeAttribute('disabled');
+      setImageName(collectionImage.name);
+      setImageSelectionProgress('100');
+      }
+      else {
+        fildset.setAttribute('disabled', '');
+        btnCancel.setAttribute('disabled', '');
+        setImageName('Escolha uma imagem para a coleção criada...');
+      }
     }
   }, [collectionImage])
 
