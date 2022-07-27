@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
 import { firebase, firestore } from '../../firebase/firebase';
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 import { v1 as uuidv1 } from 'uuid'; //timestamp UUID
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import './styles.css';
+import { getAuth } from "firebase/auth";
 
 export const NewCollection = () => {
   const { userEmail, userLogged } = useSelector(state => state.user);
@@ -19,7 +20,7 @@ export const NewCollection = () => {
   const [uuid] = useState(uuidv1());//usado para criação da ID uníca do flashcardCollection e também no nome da imagem salva no storage
   const flashcardCollection = collection(firestore, 'flashcardCollection');
   const [loading, setLoading] = useState('');
-
+  
   const handleRegisterCollection = () => {
     setLoading('Loading');
     const storage = getStorage(firebase)
@@ -58,6 +59,7 @@ export const NewCollection = () => {
 
   useEffect(() => {
     if(userLogged === true) {
+      getAuth(firebase);//Caso A pagina seja recarregada carrega as informações de autenticação
       const fildset = document.querySelector('.newCollectionProgress');
       const btnCancel = document.querySelector('.newCollectionBtnCancel');
       setImageSelectionProgress('0');
