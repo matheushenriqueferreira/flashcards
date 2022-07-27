@@ -1,19 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import './styles.css';
 import { useSelector } from "react-redux";
 import { Navbar } from '../../components/Navbar';
 import { Navigate, useNavigate } from 'react-router-dom';
-import './styles.css';
+import { firebase, firestore } from '../../firebase/firebase';
+import { getStorage, ref, getDownloadURL, getMetadata } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 
 export const EditCollection = () => {
-  const { userLogged } = useSelector(state => state.user);
+  const { userEmail ,userLogged } = useSelector(state => state.user);
   const { id, name, description, imageUrl } = useSelector(state => state.collection);
   const [collectionName, setCollectionName] = useState(name);
   const [collectionDescription, setCollectionDescription] = useState(description);
-  const [collectionImage, setCollectionImage] = useState('');
+  const [collectionImage, setCollectionImage] = useState(imageUrl);
   const [imageName, setImageName] = useState('Escolha uma imagem para a coleção criada...');
   const [imageSelectionProgress, setImageSelectionProgress] = useState('0');
   const [loading, setLoading] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(userLogged === true) {
+      const fildset = document.querySelector('.editCollectionProgress');
+      const btnCancel = document.querySelector('.editCollectionBtnCancel');
+      if(collectionImage === imageUrl) {
+        getAuth(firebase)
+        const storage = getStorage(firebase);
+        const starsRef = ref(storage, `flashcardCollectionImage/${userEmail}/${id}`);
+        getMetadata(starsRef)
+          .then((e) => {
+            setImageName(e.customMetadata.name);
+            setImageSelectionProgress('100');
+            fildset.removeAttribute('disabled');
+            btnCancel.removeAttribute('disabled');
+          })
+          .catch((error) => {
+            switch (error.code) {
+              case 'storage/object-not-found':
+                setImageName('Erro: A imagem da coleção não foi encontrada');
+                setImageSelectionProgress('0');
+                fildset.setAttribute('disabled', '');
+                btnCancel.setAttribute('disabled', '');
+              break;
+              default:
+                setImageName(error.code);
+                setImageSelectionProgress('0');
+                fildset.setAttribute('disabled', '');
+                btnCancel.setAttribute('disabled', '');
+            }
+          })
+      }
+      else {
+        if(collectionImage !== undefined) {
+          fildset.removeAttribute('disabled');
+          btnCancel.removeAttribute('disabled');
+          setImageName(collectionImage.name);
+          setImageSelectionProgress('100');
+        }
+        else {
+          fildset.setAttribute('disabled', '');
+          btnCancel.setAttribute('disabled', '');
+          setImageSelectionProgress('0');
+          setImageName('Escolha uma imagem para a coleção criada...');
+        }
+      }
+    }
+  }, [collectionImage])
+
 
   return(
     <>
@@ -58,7 +110,7 @@ export const EditCollection = () => {
         <div className="editCollectionBtn">
           {
             collectionName !== '' && collectionDescription !== '' && imageSelectionProgress === '100' && loading === '' ?
-            <button type="button" onClick={() => handleRegisterCollection()}>Salvar</button>
+            <button type="button" onClick={() => handleSaveCollectionEdit()}>Salvar</button>
             :
             loading === 'Loading' ?
             <div className="spinner-border" role="status">
