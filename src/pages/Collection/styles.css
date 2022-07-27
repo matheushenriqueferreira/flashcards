@@ -1,0 +1,74 @@
+.collectionMain {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 40px 40px;
+}
+
+
+.collectionMainTitle {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.flashcardSearch {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1em;
+  background: #ffffff;
+  border-radius: 5px;
+  height: 50px;
+}
+
+.flashcardSearch div:last-child {
+  flex: 1;
+  height: 100%;
+}
+
+.fa-magnifying-glass {
+  color: #000000;
+  font-size: 28px;
+  text-align: center;
+  padding: 10px;
+}
+
+#inputFlashcardSearch {
+  background: 0;
+  height: 100%;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: #868D96;
+  font-size: 16px;
+}
+
+.collectionMainBtnStyle {
+  border: 0;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #ffffff;
+  width: 145px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.btnNewCard button {
+  background: #5E5796;
+}
+
+.collectionMainCards {
+  display: flex;
+  flex-direction: column;
+  gap: .1em;
+}
+
+.btnPlay {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.btnPlay button {
+  background: #57966A;
+}
