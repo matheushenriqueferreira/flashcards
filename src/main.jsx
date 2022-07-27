@@ -12,6 +12,7 @@ import { Register } from './pages/Register';
 import { Login } from './pages/Login';
 import { NewCollection } from './pages/NewCollection';
 import { EditCollection } from './pages/EditCollection';
+import { Collection } from './pages/Collection';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/login' element={<Login/>} />
           <Route path='/newCollection' element={<NewCollection/>} />
           <Route path='/editCollection' element={<EditCollection/>} />
+          <Route path='/collection' element={<Collection/>} />
         </Routes>
       </BrowserRouter>
     </PersistGate>
