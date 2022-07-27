@@ -1,8 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteCollection } from "../../redux/collectionSlice";
 import './styles.css';
 
 
-export const FlashcardsCollection = ({collectionName, collectionImageUrl}) => {
+export const FlashcardsCollection = ({id, collectionName, collectionImageUrl}) => {
+  const dispatch = useDispatch();
+
   return(
     <div id="flashcardsCollection">
       <div>
@@ -15,7 +19,7 @@ export const FlashcardsCollection = ({collectionName, collectionImageUrl}) => {
         <span>{collectionName}</span>
       </div>
       <div>
-        <i className="fa-regular fa-trash-can" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+        <i className="fa-regular fa-trash-can" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => dispatch(deleteCollection({id: id, imageUrl: collectionImageUrl}))}></i>
       </div>
     </div>
   );
