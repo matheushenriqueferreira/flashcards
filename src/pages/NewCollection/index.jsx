@@ -70,10 +70,10 @@ export const NewCollection = () => {
         .
         </div>
         */
-      fildset.removeAttribute('disabled');
-      btnCancel.removeAttribute('disabled');
-      setImageName(collectionImage.name);
-      setImageSelectionProgress('100');
+        fildset.removeAttribute('disabled');
+        btnCancel.removeAttribute('disabled');
+        setImageName(collectionImage.name);
+        setImageSelectionProgress('100');
       }
       else {
         fildset.setAttribute('disabled', '');
