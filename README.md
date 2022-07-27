@@ -16,7 +16,7 @@
 
 - [x] Cadastro de usuário: *Por enquanto está salvando apenas o email e senha no firebase
 - [x] Autenticação de usuário
-- [ ] Criação/edição/exclusão de coleções de flashcards
+- [X] Criação/edição/exclusão de coleções de flashcards
 - [ ] Criação/edição/exclusão de flashcards
 - [ ] Busca de flashcards
 - [ ] Jogar
