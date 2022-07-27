@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import { Navbar } from '../../components/Navbar';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { firebase, firestore } from '../../firebase/firebase';
-import { getStorage, ref, getDownloadURL, getMetadata } from "firebase/storage";
+import { getStorage, ref, getMetadata, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";
+import { doc, updateDoc, collection } from "firebase/firestore";
 
 export const EditCollection = () => {
   const { userEmail ,userLogged } = useSelector(state => state.user);
@@ -17,6 +18,58 @@ export const EditCollection = () => {
   const [imageSelectionProgress, setImageSelectionProgress] = useState('0');
   const [loading, setLoading] = useState('');
   const navigate = useNavigate();
+
+  const handleSaveCollectionEdit = () => {
+    setLoading('Loading');
+    const db = collection(firestore, 'flashcardCollection');
+    const data = {
+      collectionName, 
+      collectionDescription, 
+      collectionImageUrl: collectionImage
+    }
+    if(collectionImage === imageUrl) {//Se a imagem não for alterada não fará um novo upload
+      updateDoc(doc(db, id), data)
+        .then(() => {
+          navigate('/');
+        })
+        .catch((error) => {
+          console.log(error.code);
+          setLoading('');
+        })
+    }
+    else {//Se imagem for alterada fara upload da nova imagem que substituira a imagem anterior já que o nome será a id da coleção
+      const storage = getStorage(firebase);
+      const flashcardCollectionImage = ref(storage, `flashcardCollectionImage/${userEmail}/${id}`);
+      const metadata = {
+        customMetadata: {
+          name: collectionImage.name
+        }
+      }
+      const uploadTask = uploadBytesResumable(flashcardCollectionImage, collectionImage, metadata)
+      uploadTask.on('state_changed', null, error => {alert(error.code)}, () => {
+      getDownloadURL(uploadTask.snapshot.ref)
+        .then(url => {
+          const data = {
+            collectionName, 
+            collectionDescription,
+            collectionImageUrl: url
+          }
+          updateDoc(doc(db, id), data)
+            .then(() => {
+              navigate('/');
+            })
+            .catch((error) => {
+              alert(error.code);
+              setLoading('');
+            });
+        })
+        .catch((error) => {
+          alert(error.code);
+          setLoading('');
+        })
+    });
+    }
+  }
 
   useEffect(() => {
     if(userLogged === true) {
