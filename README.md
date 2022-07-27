@@ -65,6 +65,7 @@ Instalar em sua máquina as seguintes ferramentas:
 - [React Redux](https://react-redux.js.org/)
 - [Google Firebase](https://firebase.google.com/)
 - [UUID](https://www.npmjs.com/package/uuid)
+- [Redux Persist](https://github.com/rt2zz/redux-persist)
 
 ## :man_technologist: Autor
 
