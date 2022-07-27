@@ -6,13 +6,14 @@ import './styles.css';
 
 export const EditCollection = () => {
   const { userLogged } = useSelector(state => state.user);
-  const navigate = useNavigate();
-  const [collectionName, setCollectionName] = useState('');
-  const [collectionDescription, setCollectionDescription] = useState('');
-  const [collectionImage, setCollectionImage] = useState();
+  const { id, name, description, imageUrl } = useSelector(state => state.collection);
+  const [collectionName, setCollectionName] = useState(name);
+  const [collectionDescription, setCollectionDescription] = useState(description);
+  const [collectionImage, setCollectionImage] = useState('');
   const [imageName, setImageName] = useState('Escolha uma imagem para a coleção criada...');
   const [imageSelectionProgress, setImageSelectionProgress] = useState('0');
   const [loading, setLoading] = useState('');
+  const navigate = useNavigate();
 
   return(
     <>
