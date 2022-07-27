@@ -4,15 +4,17 @@ import { Navbar } from "../../components/Navbar";
 import { useSelector } from "react-redux";
 import { FlashcardsCollection } from "../../components/flashcardsCollection";
 import { useNavigate } from "react-router-dom";
-import { firestore } from '../../firebase/firebase';
+import { firebase, firestore } from '../../firebase/firebase';
 import { onSnapshot, collection, query, where } from "firebase/firestore";
 import { Modal } from '../../components/Modal';
+import { getAuth } from "firebase/auth";
 
 export const Home = () => {
   const { userEmail, userLogged } = useSelector(state => state.user);
+  const { refreshPage } = useSelector(state => state.refreshPage);
   const navigate = useNavigate();
   const [flashcardCollection, setFlashcardCollection] = useState([]);
-  
+
   const handleClickFlashcard1 = () => {
     const homeContainer2 = document.querySelector('.homeContainer2');
     const homeContainer3Yellow = document.querySelector('.homeContainer3Yellow');
@@ -26,11 +28,11 @@ export const Home = () => {
     homeFlashcard2.style.opacity = '1';
   }
 
-
-
+  
   useEffect(() => {
     if(userLogged === true) {
       const myCollections = [];
+      getAuth(firebase);//Caso A pagina seja recarregada ele carrega as informações de autenticação
       const db = collection(firestore, 'flashcardCollection');
       const q = query(db, where("userEmail", "==", userEmail));//Query para trazer do bd apenas flshcardsCollection que estejam atreladas ao email do user
       onSnapshot(q, (querySnapshot) => {
@@ -44,7 +46,7 @@ export const Home = () => {
         setFlashcardCollection(myCollections);
       });
     }
-  }, [])
+  }, [refreshPage])
 
   return(
     <>
@@ -84,7 +86,7 @@ export const Home = () => {
           </div>
           <div className="homeContainer2Logged">
             {
-              flashcardCollection.map(item => <FlashcardsCollection key={item.id} collectionName={item.collectionName} collectionImageUrl={item.collectionImageUrl} />)
+              flashcardCollection.map((item, index) => <FlashcardsCollection key={item.id + index} id={item.id} collectionName={item.collectionName} collectionImageUrl={item.collectionImageUrl} />)
             }
           </div>
           <Modal title={'Exclusão'} text={'Tem certeza que deseja remover essa coleção? Isso excluirá todos os cartões contidos nela.'}  />
