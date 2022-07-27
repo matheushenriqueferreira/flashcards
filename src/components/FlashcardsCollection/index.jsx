@@ -1,16 +1,20 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteCollection } from "../../redux/collectionSlice";
+import { deleteCollection, editCollection } from "../../redux/collectionSlice";
 import './styles.css';
+import { useNavigate } from 'react-router-dom';
 
-
-export const FlashcardsCollection = ({id, collectionName, collectionImageUrl}) => {
+export const FlashcardsCollection = ({id, collectionName, collectionDescription, collectionImageUrl}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return(
     <div id="flashcardsCollection">
       <div>
-        <i className="fa-solid fa-pencil"></i>
+        <i className="fa-solid fa-pencil" onClick={() => {{
+          dispatch(editCollection({id: id, name: collectionName, description: collectionDescription, imageUrl: collectionImageUrl}))
+          navigate('/editCollection')
+        }}}></i>
       </div>
       <div>
         <img className="collectionImage" src={collectionImageUrl} alt={'Imagem que ilustra a coleção criada'}/>
