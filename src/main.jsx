@@ -10,9 +10,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Home } from './pages/Home';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
-import { NewCollection } from './pages/NewCollection'
-
-
+import { NewCollection } from './pages/NewCollection';
+import { EditCollection } from './pages/EditCollection';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -23,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/register' element={<Register/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/newCollection' element={<NewCollection/>} />
+          <Route path='/editCollection' element={<EditCollection/>} />
         </Routes>
       </BrowserRouter>
     </PersistGate>
