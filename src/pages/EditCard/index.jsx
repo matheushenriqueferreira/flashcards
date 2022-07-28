@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Navbar } from "../../components/Navbar";
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import './styles.css';
+import { doc, updateDoc } from "firebase/firestore";
+import { firestore } from "../../firebase/firebase";
 
 export const EditCard = () => {
   const { userLogged } = useSelector(state => state.user);
@@ -11,6 +13,22 @@ export const EditCard = () => {
   const [cardValue1, setCardValue1] = useState(front);
   const [cardValue2, setCardValue2] = useState(back);
   const [loading, setLoading] = useState('');
+  const navigate = useNavigate();
+
+  const handleRegisterFlashcard = () => {
+    setLoading('Loading');
+    const dbFlashcard = doc(firestore, 'flashcards', id);
+    
+    updateDoc(dbFlashcard, { front: cardValue1, back: cardValue2 })
+    .then(() => {
+      navigate('/collection');
+    })
+    .catch((error) => {
+        setLoading('');
+        alert(error.code);
+      })
+  }
+
   return(
     <>
       <Navbar />
@@ -42,7 +60,7 @@ export const EditCard = () => {
             <div className="editCardBtn">
               {
                 cardValue1 !== '' && cardValue2 !== '' && loading === '' ?
-                <button onClick={() => handleRegisterFlashcard()} type={'button'}>Cadastrar</button>
+                <button onClick={() => handleRegisterFlashcard()} type={'button'}>Salvar</button>
                 :
                 loading === 'Loading' ?
                 <div className="spinner-border" role="status">
