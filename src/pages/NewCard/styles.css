@@ -1,0 +1,11 @@
+.newCardMain {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8em;
+  margin: 40px 40px;
+}
+
+.newCardTitle {
+  font-size: 30px;
+  font-weight: bold;
+}
