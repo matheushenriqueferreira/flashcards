@@ -1,0 +1,81 @@
+.editCardMain {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  margin: 40px 40px;
+}
+
+.editCardTitle {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.editCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.editCardSubtitle {
+  font-size: 22px;
+}
+
+.editCardFlashcard {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  padding: 8px;
+  width: 200px;
+  height: 300px;
+  border-radius: 8px;
+}
+
+.editCardFlashcardConte {
+  height: 142px;
+}
+
+.editCardFlashcardConte div {
+  display: flex;
+  justify-content: center;
+  height: 80%;
+}
+
+.editCardFlashcardConte span {
+  color: #777777;
+  font-size: 14px;
+}
+
+.editCardFlashcardConte div input {
+  background: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #414141;
+  text-align: center;
+  text-decoration: underline;
+  outline: 0;
+  border: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.editCardFlashcard hr {
+  color: #777777;
+  margin: 0;
+  height: 2px;
+}
+
+.editCardBtn button {
+  border: 0;
+  color: #ffffff;
+  background: #5E5796;
+  width: 200px;
+  height: 35px;
+  border-radius: 5px;
+  transition: opacity 1s ease-in;
+}
+
+.editCardBtn button:disabled {
+  opacity: 0.2;
+  cursor: no-drop;
+}
