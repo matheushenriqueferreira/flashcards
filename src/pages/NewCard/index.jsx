@@ -16,6 +16,29 @@ export const NewCard = () => {
           <div className="newCardTitle">
             <span>Coleção - {name}</span>
           </div>
+          <div className="newCardContainer">
+            <div className="newCardSubtitle">
+              <span>Preencha os dados da frente e do verso do flashcard</span>
+            </div>
+            <div className="newCardFlashcard">
+              <div className="newCardFlashcardConte">
+                <span>Frente</span>
+                <div>
+                  <input type={'text'} autoFocus autoComplete="off" />
+                </div>
+              </div>
+              <hr />
+              <div className="newCardFlashcardConte">
+                <span>Verso</span>
+                <div>
+                  <input type={'text'} autoComplete="off" />
+                </div>
+              </div>
+            </div>
+            <div className="newCardBtn">
+              <button type={'button'}>Cadastrar </button>
+            </div>
+          </div>
         </main>
         :
         <Navigate to={'/'} />
