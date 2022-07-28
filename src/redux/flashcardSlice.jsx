@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const flashcardSlice = createSlice({
-  name: flashcard,
+  name: 'flashcard',
   initialState: {
     id: '',
     front: '',
