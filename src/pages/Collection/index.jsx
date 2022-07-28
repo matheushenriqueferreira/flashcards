@@ -7,6 +7,7 @@ import { Card } from "../../components/Card";
 
 export const Collection = () => {
   const { userLogged, userEmail } = useSelector(state => state.user);
+  const { id, name } = useSelector(state => state.collection);
   return(
     <>
       <Navbar />
@@ -14,7 +15,7 @@ export const Collection = () => {
         userLogged === true ?
         <main className="collectionMain">
           <div className="collectionMainTitle">
-            <span>Coleção - Objetos</span>
+            <span>Coleção - {name}</span>
           </div>
           <fieldset className="flashcardSearch">
             <div>
