@@ -89,7 +89,7 @@ export const Home = () => {
               flashcardCollection.map((item, index) => <FlashcardsCollection key={item.id + index} id={item.id} collectionName={item.collectionName} collectionDescription= {item.collectionDescription} collectionImageUrl={item.collectionImageUrl} />)
             }
           </div>
-          <Modal title={'Exclusão'} text={'Tem certeza que deseja remover essa coleção? Isso excluirá todos os cartões contidos nela.'}  />
+          <Modal type={'collection'} title={'Exclusão'} text={'Tem certeza que deseja remover essa coleção? Isso excluirá todos os cartões contidos nela.'}  />
         </main>
       }
     </>
