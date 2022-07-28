@@ -8,11 +8,11 @@ export const flashcardSlice = createSlice({
     back: '',
   },
   reducers: {
-    editCard: (state, payload) => {
+    editCard: (state, action) => {
       const { id, front, back } = action.payload;
       return { id: id, front: front, back: back };
     },
-    deleteCard: (state, payload) => {
+    deleteCard: (state, action) => {
       const { id } = action.payload;
       return { id: id }
     }
