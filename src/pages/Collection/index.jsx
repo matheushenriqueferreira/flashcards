@@ -6,13 +6,15 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { firestore } from '../../firebase/firebase';
+import { Modal } from '../../components/Modal';
 
 export const Collection = () => {
   const { userLogged } = useSelector(state => state.user);
   const { id, name } = useSelector(state => state.collection);
   const navigate = useNavigate();
   const [flashcards, setFlashcards] = useState([]); 
-  
+  const { refreshPage } = useSelector(state => state.refreshPage);
+
   useEffect(() => {
     if(userLogged === true && id !== '') {
       const myFlashcards = [];
@@ -28,7 +30,7 @@ export const Collection = () => {
         setFlashcards(myFlashcards);
       });
     }
-  }, []);
+  }, [refreshPage]);
 
   return(
     <>
@@ -58,6 +60,7 @@ export const Collection = () => {
           <div className="btnPlay">
             <button type="button" className="collectionMainBtnStyle">Jogar!</button>
           </div>
+          <Modal type={'flashcard'} title={'Excluir flashcard'} text={'Tem certeza que deseja remover esse registro?'}/>
         </main>
         :
         <Navigate to={'/'} />
