@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { editCard } from '../../redux/flashcardSlice';
+import { editCard, deleteCard } from '../../redux/flashcardSlice';
 import './styles.css'
 
 export const Card = ({id, front, back}) => {
@@ -20,7 +20,7 @@ export const Card = ({id, front, back}) => {
           }} className="fa-solid fa-pencil"></i>
         </div>
         <div>
-          <i className="fa-regular fa-trash-can"></i>
+          <i onClick={() => dispatch(deleteCard({id: id}))} data-bs-toggle="modal" data-bs-target="#staticBackdrop" className="fa-regular fa-trash-can"></i>
         </div>
       </div>
     </div>
