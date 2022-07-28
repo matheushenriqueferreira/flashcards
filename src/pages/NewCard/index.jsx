@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import './styles.css';
 import { useSelector } from "react-redux";
 import { Navbar } from '../../components/Navbar';
 import { Navigate } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+import { firestore } from '../../firebase/firebase';
+import { useNavigate } from  'react-router-dom';
 
 export const NewCard = () => {
   const { userLogged } = useSelector(state => state.user);
-  const { name } = useSelector(state => state.collection);
+  const { id, name } = useSelector(state => state.collection);
+  const [cardValue1, setCardValue1] = useState('');
+  const [cardValue2, setCardValue2] = useState('');
+  const [loading, setLoading] = useState('');
+  const navigate = useNavigate();
+
+  const handleRegisterFlashcard = () => {
+    setLoading('Loading');
+    const db = collection(firestore, 'flashcards');
+    const data = {
+      flashcardCollectionId: id,
+      front: cardValue1,
+      back: cardValue2
+    }
+    addDoc(db, data)
+      .then(() => {
+        navigate('/collection');
+      })
+      .catch((error) => {
+        setLoading('Loading');
+        alert(error.code);
+      })
+  }
+
   return(
     <>
       <Navbar />
@@ -24,19 +50,29 @@ export const NewCard = () => {
               <div className="newCardFlashcardConte">
                 <span>Frente</span>
                 <div>
-                  <input type={'text'} autoFocus autoComplete="off" />
+                  <input onChange={(e) => setCardValue1(e.target.value)} value={cardValue1} type={'text'} autoFocus autoComplete="off" />
                 </div>
               </div>
               <hr />
               <div className="newCardFlashcardConte">
                 <span>Verso</span>
                 <div>
-                  <input type={'text'} autoComplete="off" />
+                  <input onChange={(e) => setCardValue2(e.target.value)} value={cardValue2} type={'text'} autoComplete="off" />
                 </div>
               </div>
             </div>
             <div className="newCardBtn">
-              <button type={'button'}>Cadastrar </button>
+              {
+                cardValue1 !== '' && cardValue2 !== '' && loading === '' ?
+                <button onClick={() => handleRegisterFlashcard()} type={'button'}>Cadastrar</button>
+                :
+                loading === 'Loading' ?
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+                :
+                <button type={'button'} disabled>Cadastrar</button>
+              }
             </div>
           </div>
         </main>
