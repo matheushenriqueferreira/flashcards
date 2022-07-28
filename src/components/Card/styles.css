@@ -1,0 +1,19 @@
+.componentCard {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background: #ffffff;
+  font-size: 20px;
+  padding: 5px 20px;
+}
+
+.componentCardName {
+  flex: 1;
+  font-weight: bold;
+  color: #3C3C3C;
+}
+
+.componentCardBtn {
+  display: flex;
+  gap: 1em;
+}
