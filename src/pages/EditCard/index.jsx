@@ -9,7 +9,7 @@ import { firestore } from "../../firebase/firebase";
 export const EditCard = () => {
   const { userLogged } = useSelector(state => state.user);
   const { name } = useSelector(state => state.collection);
-  const { id, front, back } = useSelector(state => state.flashcard);
+  const { flashcardId, front, back } = useSelector(state => state.flashcard);
   const [cardValue1, setCardValue1] = useState(front);
   const [cardValue2, setCardValue2] = useState(back);
   const [loading, setLoading] = useState('');
@@ -17,7 +17,7 @@ export const EditCard = () => {
 
   const handleRegisterFlashcard = () => {
     setLoading('Loading');
-    const dbFlashcard = doc(firestore, 'flashcards', id);
+    const dbFlashcard = doc(firestore, 'flashcards', flashcardId);
     
     updateDoc(dbFlashcard, { front: cardValue1, back: cardValue2 })
     .then(() => {
