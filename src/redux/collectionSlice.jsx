@@ -16,9 +16,13 @@ export const collectionSlice = createSlice({
     deleteCollection: (state, action) => {
       const { id, imageUrl } = action.payload;
       return { id: id, imageUrl: imageUrl };
+    },
+    goToCollectionPage: (state, action) => {
+      const { id, name } = action.payload;
+      return { id: id, name: name }
     }
   }
 })
 
-export const { editCollection, deleteCollection } = collectionSlice.actions;
+export const { editCollection, deleteCollection, goToCollectionPage } = collectionSlice.actions;
 export default collectionSlice.reducer;
