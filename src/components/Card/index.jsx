@@ -1,11 +1,11 @@
 import React from "react";
 import './styles.css'
 
-export const Card = () => {
+export const Card = ({id, front, back}) => {
   return(
     <div className="componentCard">
       <div className="componentCardName">
-        <span>Árvore</span>
+        <span>{front}</span>
       </div>
       <div className="componentCardBtn">
         <div>
