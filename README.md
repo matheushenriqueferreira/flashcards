@@ -40,8 +40,7 @@ Acesse o código fonte em: [GitHub-flashcards](https://github.com/matheushenriqu
 
 ## :hammer_and_wrench: Abrir e rodar o projeto
 ### Pré-requisitos
-Antes de começar, você precisar ter uma conta no [Google](https://accounts.google.com/) para criação de um projeto no [Firebase](https://firebase.google.com/){Tutorial para criação em breve}.
-<br/>
+
 Instalar em sua máquina as seguintes ferramentas:
 [Node.js](https://nodejs.org/en/) e um editor de código de sua preferência para desenvolvimento, no caso para esse projeto eu utilizei o [Visual Studio Code](https://code.visualstudio.com/).
 
