@@ -5,15 +5,15 @@ import { doc, deleteDoc, collection } from 'firebase/firestore';
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { refresh } from '../../redux/refreshPageSlice';
 
-export const Modal = ({title, text}) => {
+export const Modal = ({ type, title, text}) => {
   const [modalText, setModalText] = useState(text);
   const [loading, setLoading] = useState(''); 
   const { id } = useSelector(state => state.collection);
   const { userEmail } = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const { flashcardId } = useSelector(state => state.flashcard);
 
-  const handleDeleting = () => {
-    setLoading('Deleting');
+  function deleteCollection() {
     const db = collection(firestore, 'flashcardCollection');
     const storage = getStorage();
     const imgRef = ref(storage, `flashcardCollectionImage/${userEmail}/${id}`);
@@ -36,6 +36,37 @@ export const Modal = ({title, text}) => {
         setLoading('Deleted');
         setModalText(error.code);
       });
+  }
+  
+  function deleteFlashcard() {
+    const db = collection(firestore, 'flashcards');
+    deleteDoc(doc(db, flashcardId))
+      .then(() => {
+        setLoading('Deleted');
+        setModalText('Flashcard deletado com sucesso.');
+      })
+      .catch((error) => {
+        setLoading('Deleted');
+        setModalText(error.code);
+      })
+      .finally(() => {
+        dispatch(refresh());
+      })
+  }
+
+  const handleDeleting = () => {
+    setLoading('Deleting');
+    switch(type) {
+      case 'collection':
+        deleteCollection();
+      break;
+      case 'flashcard':
+        deleteFlashcard();
+      break;
+      default: 
+        setLoading('');
+        alert(`Verefique o valor do argumento type do componente modal\ntype=${type} não é válido no momento`)
+    }
   }
 
   return(
