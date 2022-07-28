@@ -2,12 +2,13 @@ import React from "react";
 import './styles.css';
 import { Navbar } from '../../components/Navbar';
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card";
 
 export const Collection = () => {
   const { userLogged, userEmail } = useSelector(state => state.user);
   const { id, name } = useSelector(state => state.collection);
+  const navigate = useNavigate();
   return(
     <>
       <Navbar />
@@ -26,7 +27,7 @@ export const Collection = () => {
             </div>
           </fieldset>
           <div className="btnNewCard">
-            <button type="button" className="collectionMainBtnStyle">Novo cartão</button>
+            <button onClick={() => navigate('/newCard')} type="button" className="collectionMainBtnStyle">Novo cartão</button>
           </div>
           <div className="collectionMainCards">
             <Card />
