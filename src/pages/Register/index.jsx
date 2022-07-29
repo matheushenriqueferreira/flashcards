@@ -3,6 +3,7 @@ import { Navbar } from "../../components/Navbar";
 import './styles.css'
 import { firebase } from "../../firebase/firebase";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const [userName, setUserName] = useState('')
@@ -13,6 +14,8 @@ export const Register = () => {
   const [msgEmail, setMsgEmail] = useState('');
   const [msgPassword, setMsgPassword] = useState('');
   const [msgRepeatPassword, setMsgRepeatPassword] = useState('');
+  const [loading, setLoading ] = useState(''); 
+  const navigate = useNavigate();
 
   const handleName = (name) => {
     if(name !== '') {
@@ -104,23 +107,27 @@ export const Register = () => {
     }
   }
 
-  
-
   const handleRegisterUser = async () => {
+    setLoading('Loading');
     const auth = getAuth(firebase);
     createUserWithEmailAndPassword(auth, userEmail, userPassword)
       .then((response) => {
-        alert(response.user.email);
+        alert(`Cadastro com ${response.user.email} realizado com sucesso.`)
+        navigate('/login');
       })
       .catch((error) => {
         switch(error.code) {
           case 'auth/invalid-email':
+            setLoading('');
             alert('E-mail inválido.');
           break;
           case 'auth/email-already-in-use':
+            setLoading('');
             alert(`O E-mail: ${userEmail} já está em uso.`);
           break;
-          default: alert(error.code);
+          default: 
+            setLoading('');
+            alert(error.code);
         }
       });
   }
@@ -173,8 +180,13 @@ export const Register = () => {
           </div>
           <div className="registerBtn">
             {
-              msgName === 'Ok' && msgEmail === 'Ok' && msgPassword === 'Ok' && msgRepeatPassword === 'Ok' ?
+              msgName === 'Ok' && msgEmail === 'Ok' && msgPassword === 'Ok' && msgRepeatPassword === 'Ok' && loading === '' ?
               <button type="button" onClick={() => handleRegisterUser()}>Cadastrar</button>
+              :
+              loading === 'Loading' ?
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
               :
               <button type="button" disabled>Cadastrar</button>
             }
