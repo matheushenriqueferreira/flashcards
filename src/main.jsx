@@ -15,6 +15,7 @@ import { EditCollection } from './pages/EditCollection';
 import { Collection } from './pages/Collection';
 import { NewCard } from './pages/NewCard';
 import { EditCard } from './pages/EditCard';
+import { Play } from './pages/Play';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path='/collection' element={<Collection/>} />
           <Route path='/newCard' element={<NewCard/>} />
           <Route path='/editCard' element={<EditCard/>} />
+          <Route path='/play' element={<Play/>} />
         </Routes>
       </BrowserRouter>
     </PersistGate>
