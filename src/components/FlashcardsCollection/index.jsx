@@ -10,26 +10,28 @@ export const FlashcardsCollection = ({id, collectionName, collectionDescription,
 
   return(
     <div id="flashcardsCollection">
-      <div>
-        <i className="fa-solid fa-pencil" onClick={() => {{
-          dispatch(editCollection({id: id, name: collectionName, description: collectionDescription, imageUrl: collectionImageUrl}))
-          navigate('/editCollection')
-        }}}></i>
-      </div>
-      <div>
-        <img onClick={() => {
-          dispatch(goToCollectionPage({id: id, name: collectionName})),
-          navigate('/collection')
-        }} className="collectionImage" src={collectionImageUrl} alt={'Imagem que ilustra a coleção criada'}/>
-      </div>
-      <div>
-        <span onClick={() => {
-          dispatch(goToCollectionPage({id: id, name: collectionName})),
-          navigate('/collection')
-        }}>{collectionName}</span>
-      </div>
-      <div>
-        <i className="fa-regular fa-trash-can" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => dispatch(deleteCollection({id: id, imageUrl: collectionImageUrl}))}></i>
+      <div className="cardContent">
+        <div>
+          <i className="fa-solid fa-pencil" onClick={() => {{
+            dispatch(editCollection({id: id, name: collectionName, description: collectionDescription, imageUrl: collectionImageUrl}))
+            navigate('/editCollection')
+          }}}></i>
+        </div>
+        <div>
+          <img onClick={() => {
+            dispatch(goToCollectionPage({id: id, name: collectionName})),
+            navigate('/collection')
+          }} className="collectionImage" src={collectionImageUrl} alt={'Imagem que ilustra a coleção criada'}/>
+        </div>
+        <div>
+          <span onClick={() => {
+            dispatch(goToCollectionPage({id: id, name: collectionName})),
+            navigate('/collection')
+          }}>{collectionName}</span>
+        </div>
+        <div>
+          <i className="fa-regular fa-trash-can" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={() => dispatch(deleteCollection({id: id, imageUrl: collectionImageUrl}))}></i>
+        </div>
       </div>
     </div>
   );

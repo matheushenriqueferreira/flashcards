@@ -1,55 +1,77 @@
 #flashcardsCollection {
-  display: flex;
-  flex-direction: column;
-  gap: .8em;
+  width: 210px;
+  height: 300px;
   background: #ffffff;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.card {
   width: 200px;
   height: 300px;
-  border-radius: 10px;
-  padding: 10px;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 5px;
 }
 
-#flashcardsCollection div:first-child {
+.cardContent {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
-.fa-pencil {
-  cursor: pointer;
+.cardContent div:first-child {
+  display: flex;
   font-size: 22px;
+  flex-basis: 10%;
+  align-items: center;
+  justify-content: flex-end;
   color: #4472C4;
 }
 
-#flashcardsCollection div:nth-child(2) {
-  width: 100%;
-  height: 180px;
+.cardContent div:first-child i {
+  cursor: pointer;
 }
 
-.collectionImage {
+.cardContent div:nth-child(2) {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 60%;
+}
+
+.cardContent div:nth-child(2) img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 160px;
   cursor: pointer;
 }
 
-#flashcardsCollection div:nth-child(3) {
+.cardContent div:nth-child(3) {
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  color: #27ACA7;
+  flex-basis: 20%;
   font-weight: bold;
   font-size: 24px;
+  color: #27ACA7;
   cursor: pointer;
 }
 
-#flashcardsCollection div:last-child {
+.cardContent div:last-child {
   display: flex;
+  flex-basis: 10%;
+  font-size: 22px;
+  align-items: center;
   justify-content: flex-end;
-  color: #FF1818;
+  color:  #FF1818;
 }
 
-.fa-trash-can {
+.cardContent div:last-child i {
   cursor: pointer;
-  font-size: 22px;
-  color: #FF1818;
 }
