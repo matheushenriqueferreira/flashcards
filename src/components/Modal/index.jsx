@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { firestore } from '../../firebase/firebase';
-import { doc, deleteDoc, collection } from 'firebase/firestore';
+import { doc, deleteDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { getStorage, ref, deleteObject } from "firebase/storage";
 import { refresh } from '../../redux/refreshPageSlice';
 
@@ -13,10 +13,24 @@ export const Modal = ({ type, title, text}) => {
   const dispatch = useDispatch();
   const { flashcardId } = useSelector(state => state.flashcard);
 
-  function deleteCollection() {
+  //Função assincrona para deletar flashcards vinculados a uma coleção
+  async function deleteAllFlashcardFromCollection(cardId) {
+    await deleteDoc(doc(collection(firestore, 'flashcards'), cardId));
+  }
+
+  //Função assincrona para deletar coleções que contenham ou não flashcards e imagens vinculadas a ela
+  async function deleteCollection() {
     const db = collection(firestore, 'flashcardCollection');
     const storage = getStorage();
     const imgRef = ref(storage, `flashcardCollectionImage/${userEmail}/${id}`);
+    
+    //Faz consulta no banco para verificar se existem falshcards vinculados a coleção
+    const q = query(collection(firestore, "flashcards"), where("flashcardCollectionId", "==", id));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      deleteAllFlashcardFromCollection(doc.id);//Chamada da função para deletar flashcards vinculdos a id da coleção
+    });
+
     deleteDoc(doc(db, id))//Deletar um flashcardCollection
       .then(() => {
         deleteObject(imgRef)//Deletar a imagem vinculada a coleção
@@ -38,6 +52,7 @@ export const Modal = ({ type, title, text}) => {
       });
   }
   
+  //função para deletar flashcards
   function deleteFlashcard() {
     const db = collection(firestore, 'flashcards');
     deleteDoc(doc(db, flashcardId))
