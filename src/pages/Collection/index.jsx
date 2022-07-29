@@ -4,7 +4,7 @@ import { Navbar } from '../../components/Navbar';
 import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
 import { firestore } from '../../firebase/firebase';
 import { Modal } from '../../components/Modal';
 
@@ -13,11 +13,19 @@ export const Collection = () => {
   const { id, name } = useSelector(state => state.collection);
   const navigate = useNavigate();
   const [flashcards, setFlashcards] = useState([]); 
+  const [flashcardsSearch, setFlashcardsSearch] = useState([]); 
   const { refreshPage } = useSelector(state => state.refreshPage);
-
+  const myFlashcards = [];
+  
+  const handleSearch = (value) => {
+    const filter = flashcardsSearch.filter((el) => {
+      return el.front.indexOf(value) > -1;
+    });
+    setFlashcards(filter);
+  }
+  
   useEffect(() => {
     if(userLogged === true && id !== '') {
-      const myFlashcards = [];
       const q = query(collection(firestore, "flashcards"), where("flashcardCollectionId", "==", id));
       onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -28,6 +36,7 @@ export const Collection = () => {
           myFlashcards.push(data);
         });
         setFlashcards(myFlashcards);
+        setFlashcardsSearch(myFlashcards);
       });
     }
   }, [refreshPage]);
@@ -42,13 +51,13 @@ export const Collection = () => {
             <span>Coleção - {name}</span>
           </div>
           {
-            flashcards.length > 0 ?
+            flashcardsSearch.length > 0 ?
             <fieldset className="flashcardSearch">
               <div>
                 <i className="fa-solid fa-magnifying-glass"></i>
               </div>
               <div>
-                <input id="inputFlashcardSearch" type={'text'} placeholder={'Busque por um elemento'} />
+                <input onChange={(e) => handleSearch(e.target.value)} id="inputFlashcardSearch" type={'text'} placeholder={'Busque por um elemento'} autoComplete='off' />
               </div>
             </fieldset>
             :
@@ -71,7 +80,7 @@ export const Collection = () => {
           </div>
           <div className="btnPlay">
             {
-              flashcards.length > 0 ?
+              flashcardsSearch.length > 0 ?
               <button type="button" className="collectionMainBtnStyle">Jogar!</button>
               :
               <button type="button" className="collectionMainBtnStyle" disabled>Jogar!</button>
