@@ -81,7 +81,7 @@ export const Collection = () => {
           <div className="btnPlay">
             {
               flashcardsSearch.length > 0 ?
-              <button type="button" className="collectionMainBtnStyle">Jogar!</button>
+              <button onClick={() => navigate('/play')} type="button" className="collectionMainBtnStyle">Jogar!</button>
               :
               <button type="button" className="collectionMainBtnStyle" disabled>Jogar!</button>
             }
