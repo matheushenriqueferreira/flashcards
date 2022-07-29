@@ -3,6 +3,7 @@ import userSlice from "./userSlice";
 import collectionSlice from "./collectionSlice";
 import refreshPageSlice from "./refreshPageSlice";
 import flashcardSlice from './flashcardSlice';
+import playSlice from "./playSlice";
 import {
   persistStore,
   persistReducer,
@@ -24,7 +25,13 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, userSlice);
 
 export const store = configureStore({
-  reducer: { user: persistedReducer, collection: collectionSlice, refreshPage: refreshPageSlice, flashcard: flashcardSlice },
+  reducer: { 
+    user: persistedReducer, 
+    collection: collectionSlice, 
+    refreshPage: refreshPageSlice, 
+    flashcard: flashcardSlice,
+    play: playSlice
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
