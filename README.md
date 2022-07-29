@@ -19,7 +19,7 @@
 - [x] Criação/edição/exclusão de coleções de flashcards
 - [x] Criação/edição/exclusão de flashcards
 - [x] Busca de flashcards
-- [ ] Jogar
+- [x] Jogar
 
 ## Tabela de Conteúdo
 <!--ts-->
