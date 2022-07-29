@@ -1,11 +1,9 @@
 <h1 align="center">Flashcards</h1>
 
-<p align="center">
+<div align="center">
   <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
-</p>
-<p align="center">
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/matheushenriqueferreira/flashcards?style=for-the-badge">
-</p>
+</div>
 
 ## Descrição do Projeto
 
