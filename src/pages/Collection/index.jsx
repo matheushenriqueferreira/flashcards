@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import './styles.css';
 import { Navbar } from '../../components/Navbar';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Card } from "../../components/Card";
 import { collection, onSnapshot, query, where, getDocs } from "firebase/firestore";
 import { firestore } from '../../firebase/firebase';
 import { Modal } from '../../components/Modal';
+import { setFront, setBack, cleanState } from '../../redux/playSlice';
 
 export const Collection = () => {
   const { userLogged } = useSelector(state => state.user);
@@ -15,7 +16,7 @@ export const Collection = () => {
   const [flashcards, setFlashcards] = useState([]); 
   const [flashcardsSearch, setFlashcardsSearch] = useState([]); 
   const { refreshPage } = useSelector(state => state.refreshPage);
-  const myFlashcards = [];
+  const dispatch = useDispatch();
   
   const handleSearch = (value) => {
     const filter = flashcardsSearch.filter((el) => {
@@ -26,6 +27,8 @@ export const Collection = () => {
   
   useEffect(() => {
     if(userLogged === true && id !== '') {
+      const myFlashcards = [];
+      dispatch(cleanState());//Limpa os arraylists da playSlice
       const q = query(collection(firestore, "flashcards"), where("flashcardCollectionId", "==", id));
       onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -34,6 +37,8 @@ export const Collection = () => {
             id: doc.id
           }
           myFlashcards.push(data);
+          dispatch(setFront({front: data.front}));
+          dispatch(setBack({back: data.back}));
         });
         setFlashcards(myFlashcards);
         setFlashcardsSearch(myFlashcards);
