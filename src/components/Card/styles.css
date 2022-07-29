@@ -17,3 +17,15 @@
   display: flex;
   gap: 1em;
 }
+
+.componentCardIconPencil i {
+  font-size: 22px;
+  cursor: pointer;
+  color: #4472C4;
+}
+
+.componentCardIconTrash i {
+  font-size: 22px;
+  cursor: pointer;
+  color:  #FF1818;
+}
