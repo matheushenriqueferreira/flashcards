@@ -11,6 +11,9 @@
 
 <p align="center">Uma aplicação que possibilita a criação de flashcards para ajudar na memorização e aprendizagem.</p>
 <p align="center">🧠📚</p>
+<div align="center">
+  <img src="./docs/initial.gif" />
+</div>
 
 ## :white_check_mark: Funcionalidades do projeto
 
