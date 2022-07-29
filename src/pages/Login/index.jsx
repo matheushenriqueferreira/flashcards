@@ -100,11 +100,9 @@ export const Login = () => {
           <div className="loginBtn">
             {
               loading === 'Loading' ?
-              <>
-                <div className="spinner-border" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              </>
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
               :
               msgEmail === 'Ok' && msgPassword === 'Ok' ?
                 <button type="button" onClick={() => handleLogin()}>Entrar</button>
