@@ -41,14 +41,26 @@ export const Collection = () => {
           <div className="collectionMainTitle">
             <span>Coleção - {name}</span>
           </div>
-          <fieldset className="flashcardSearch">
-            <div>
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <div>
-              <input id="inputFlashcardSearch" type={'text'} placeholder={'Busque por um elemento'} />
-            </div>
-          </fieldset>
+          {
+            flashcards.length > 0 ?
+            <fieldset className="flashcardSearch">
+              <div>
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <div>
+                <input id="inputFlashcardSearch" type={'text'} placeholder={'Busque por um elemento'} />
+              </div>
+            </fieldset>
+            :
+            <fieldset className="flashcardSearch" disabled>
+              <div>
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </div>
+              <div>
+                <input id="inputFlashcardSearch" type={'text'} placeholder={'Busque por um elemento'} />
+              </div>
+            </fieldset>
+          }
           <div className="btnNewCard">
             <button onClick={() => navigate('/newCard')} type="button" className="collectionMainBtnStyle">Novo cartão</button>
           </div>
@@ -58,7 +70,12 @@ export const Collection = () => {
             }
           </div>
           <div className="btnPlay">
-            <button type="button" className="collectionMainBtnStyle">Jogar!</button>
+            {
+              flashcards.length > 0 ?
+              <button type="button" className="collectionMainBtnStyle">Jogar!</button>
+              :
+              <button type="button" className="collectionMainBtnStyle" disabled>Jogar!</button>
+            }
           </div>
           <Modal type={'flashcard'} title={'Excluir flashcard'} text={'Tem certeza que deseja remover esse registro?'}/>
         </main>
