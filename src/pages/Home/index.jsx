@@ -56,7 +56,7 @@ export const Home = () => {
         <main className="homeMain">
           <div className="homeContainer1">
             <h1>Mind Booster</h1>
-            <span>Treine a sua memória com Flash Cards!</span>
+            <span>Treine a sua memória com Flashcards!</span>
           </div>
           <div className="homeContainer2">
             <span>Como se chama carro em inglês?</span>
