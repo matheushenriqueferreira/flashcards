@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './styles.css'
@@ -7,6 +7,7 @@ import { getAuth, signOut } from "firebase/auth";
 
 export const Navbar = ({ page, btnText, btnLink }) => {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState('');
   const { userLogged } = useSelector(state=> state.user);
   const dispatch = useDispatch();
 
@@ -19,10 +20,17 @@ export const Navbar = ({ page, btnText, btnLink }) => {
     });
   }
 
+  useEffect(() => {
+    if(userLogged === true) {
+      const auth = getAuth();
+      setUserName(auth.currentUser.displayName);
+    }
+  }, [userLogged]);
+
   return(
     <header className="navbarHeader">
       <div className="navbarNav">
-        <div onClick={() => navigate('/')}>
+        <div className="navbarNavLogo" onClick={() => navigate('/')}>
           <i className="fa-solid fa-brain"></i>
           <span>QI Labs</span>
         </div>
@@ -38,6 +46,10 @@ export const Navbar = ({ page, btnText, btnLink }) => {
             </>
             :
             <>
+              <div className="navbarUserName">
+                <i className="fa-solid fa-circle-user"></i>
+                <span>{userName}</span>
+              </div>
               <button onClick={() => navigate('/')} type="button">Minhas Coleções</button>
               <button onClick={() => handleSignOut()} type="button">Sair</button>
             </>
