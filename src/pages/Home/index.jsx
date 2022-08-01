@@ -32,7 +32,7 @@ export const Home = () => {
   useEffect(() => {
     if(userLogged === true) {
       const myCollections = [];
-      getAuth(firebase);//Caso A pagina seja recarregada ele carrega as informações de autenticação
+      const auth = getAuth(firebase);//Caso A pagina seja recarregada ele carrega as informações de autenticação
       const db = collection(firestore, 'flashcardCollection');
       const q = query(db, where("userEmail", "==", userEmail));//Query para trazer do bd apenas flshcardsCollection que estejam atreladas ao email do user
       onSnapshot(q, (querySnapshot) => {

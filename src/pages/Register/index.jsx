@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import './styles.css'
 import { firebase } from "../../firebase/firebase";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
@@ -112,8 +112,14 @@ export const Register = () => {
     const auth = getAuth(firebase);
     createUserWithEmailAndPassword(auth, userEmail, userPassword)
       .then((response) => {
-        alert(`Cadastro com ${response.user.email} realizado com sucesso.`)
-        navigate('/login');
+        updateProfile(auth.currentUser, {displayName: userName})
+          .then(() => {
+            alert(`Cadastro com ${response.user.email} realizado com sucesso.`)
+            navigate('/login');
+          })
+          .catch((error) => {
+            alert(error);
+          });
       })
       .catch((error) => {
         switch(error.code) {
