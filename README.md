@@ -15,7 +15,7 @@
 
 ## :white_check_mark: Funcionalidades do projeto
 
-- [x] Cadastro de usuário: *Por enquanto está salvando apenas o email e senha no firebase
+- [x] Cadastro de usuário
 - [x] Autenticação de usuário
 - [x] Criação/edição/exclusão de coleções de flashcards
 - [x] Criação/edição/exclusão de flashcards
