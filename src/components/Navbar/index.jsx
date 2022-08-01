@@ -3,11 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import './styles.css'
 import { logout } from "../../redux/userSlice";
+import { getAuth, signOut } from "firebase/auth";
 
 export const Navbar = ({ page, btnText, btnLink }) => {
   const navigate = useNavigate();
   const { userLogged } = useSelector(state=> state.user);
   const dispatch = useDispatch();
+
+  const handleSignOut = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      dispatch(logout());
+    }).catch((error) => {
+      alert(error.code);
+    });
+  }
 
   return(
     <header className="navbarHeader">
@@ -29,7 +39,7 @@ export const Navbar = ({ page, btnText, btnLink }) => {
             :
             <>
               <button onClick={() => navigate('/')} type="button">Minhas Coleções</button>
-              <button onClick={() => dispatch(logout())} type="button">Sair</button>
+              <button onClick={() => handleSignOut()} type="button">Sair</button>
             </>
           }
         </div>
