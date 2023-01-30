@@ -31,15 +31,27 @@
 - [x] Jogar
 
 ## :hammer_and_wrench: Executar a aplicação
+  
+  ### 1: Acesse a pasta do projeto baixado no terminal/cmd
+    cd mind-booster
 
-    # Acesse a pasta do projeto baixado no terminal/cmd
-    $ cd flashcards
+  ### 2: Dentro da pasta do projeto, acesse o arquivo em /mind-booster/src/firebase/firebase.js e substitua com as configurações do seu projeto criado no Firebase.
+    import { initializeApp } from "firebase/app";
+    import { initializeFirestore } from "firebase/firestore";
 
-    # Instale as dependências
-    $ npm install
+    const firebaseConfig = {
+      // Insira aqui a configuração do projeto do Firebase
+    };
 
-    # Execute a aplicação
-    $ npm run dev
+    export const firebase = initializeApp(firebaseConfig);
+    export const firestore = initializeFirestore(firebase, {experimentalForceLongPolling: true});
+  #### Duvidas? Entre em contato comigo ou acesse a documentação sobre a [configuração do projeto Firebase.](https://firebase.google.com/docs/web/setup)
+
+  ### 3: Instale as dependências
+    npm install
+
+  ### 4: Execute a aplicação
+    npm run dev
 
 
 ## :hash: Tecnologias utilizadas
