@@ -13,7 +13,7 @@
    * [Autor](#man_technologist-autor)
 <!--te-->
 
-## :memo: Descrição do Projeto
+## :memo: Descrição do projeto
 
 <p align="center">O Mind booster possibilita a criação de flashcards para ajudar na memorização e aprendizagem.</p>
 <p align="center">🧠📚</p>
