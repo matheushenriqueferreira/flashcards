@@ -4,9 +4,18 @@
   <img src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge"/>
 </div>
 
-## Descrição do Projeto
+## :pushpin: Tabela de conteúdo
+<!--ts-->
+   * [Descrição do projeto](#memo-descrição-do-projeto)
+   * [Funcionalidades do projeto](#white_check_mark-funcionalidades-do-projeto)
+   * [Executar a aplicação](#hammer_and_wrench-executar-a-aplicação)
+   * [Tecnologias utilizadas](#hash-tecnologias-utilizadas)
+   * [Autor](#man_technologist-autor)
+<!--te-->
 
-<p align="center">Uma aplicação que possibilita a criação de flashcards para ajudar na memorização e aprendizagem.</p>
+## :memo: Descrição do Projeto
+
+<p align="center">O Mind booster possibilita a criação de flashcards para ajudar na memorização e aprendizagem.</p>
 <p align="center">🧠📚</p>
 <div align="center">
   <img src="./docs/initial.gif" />
@@ -21,30 +30,8 @@
 - [x] Busca de flashcards
 - [x] Jogar
 
-## Tabela de Conteúdo
-<!--ts-->
-   * [Descrição do Projeto](#descrição-do-projeto)
-   * [Funcionalidades do projeto](#white_check_mark-funcionalidades-do-projeto)
-   * [Tabela de Conteúdo](#tabela-de-conteúdo)
-   * [Acesso ao projeto](#file_folder-acesso-ao-projeto)
-   * [Abrir e rodar o projeto](#hammer_and_wrench-abrir-e-rodar-o-projeto)
-       * [Pré-requisitos](#pré-requisitos)
-       * [Rodar aplicação](#rodar-aplicação)
-   * [Tecnologias utilizadas](#hash-tecnologias-utilizadas)
-   * [Autor](#man_technologist-autor)
-<!--te-->
+## :hammer_and_wrench: Executar a aplicação
 
-## :file_folder: Acesso ao projeto
-
-Acesse o código fonte em: [GitHub-flashcards](https://github.com/matheushenriqueferreira/flashcards)
-
-## :hammer_and_wrench: Abrir e rodar o projeto
-### Pré-requisitos
-
-Instalar em sua máquina as seguintes ferramentas:
-[Node.js](https://nodejs.org/en/) e um editor de código de sua preferência para desenvolvimento, no caso para esse projeto eu utilizei o [Visual Studio Code](https://code.visualstudio.com/).
-
-### Rodar aplicação
     # Acesse a pasta do projeto baixado no terminal/cmd
     $ cd flashcards
 
